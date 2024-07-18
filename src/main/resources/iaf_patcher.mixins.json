@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.iafenvoy.iafpatcher.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "iafpatcher.refmap.json",
+  "mixins": [
+    "EntityDragonBaseMixin",
+    "EntityFireDragonMixin",
+    "EntityIceDragonMixin",
+    "EntityLightningDragonMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
