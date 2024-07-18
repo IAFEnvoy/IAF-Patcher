@@ -12,7 +12,8 @@
     "TitleScreenMixin"
   ],
   "client": [
-    "ClientEventsMixin"
+    "ClientEventsMixin",
+    "LayerDragonArmorMixin"
   ],
   "injectors": {
     "defaultRequire": 1
