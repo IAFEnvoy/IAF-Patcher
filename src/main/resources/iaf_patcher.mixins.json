@@ -8,9 +8,11 @@
     "EntityDragonBaseMixin",
     "EntityFireDragonMixin",
     "EntityIceDragonMixin",
-    "EntityLightningDragonMixin"
+    "EntityLightningDragonMixin",
+    "TitleScreenMixin"
   ],
   "client": [
+    "ClientEventsMixin"
   ],
   "injectors": {
     "defaultRequire": 1
