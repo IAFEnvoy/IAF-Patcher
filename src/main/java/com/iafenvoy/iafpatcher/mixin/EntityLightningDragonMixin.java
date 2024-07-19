@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(value = EntityLightningDragon.class, remap = false)
 public class EntityLightningDragonMixin {
-    @Redirect(method = "stimulateFire", at = @At(value = "INVOKE", target = "Lcom/github/alexthe666/iceandfire/entity/EntityLightningDragon;distanceToSqr(DDD)D"))
+    @Redirect(method = "stimulateFire", at = @At(value = "INVOKE", target = "Lcom/github/alexthe666/iceandfire/entity/EntityLightningDragon;distanceToSqr(DDD)D",remap = true))
     private double onGetDistance(EntityLightningDragon instance, double x, double y, double z) {
         return Math.sqrt(instance.distanceToSqr(x, y, z));
     }

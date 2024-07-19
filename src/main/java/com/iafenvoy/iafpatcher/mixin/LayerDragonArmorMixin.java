@@ -36,16 +36,17 @@ public abstract class LayerDragonArmorMixin extends RenderLayer<EntityDragonBase
         for (EquipmentSlot slot : ARMOR_SLOTS) {
             ItemStack stack = dragon.getItemBySlot(slot);
             if (stack.isEmpty()) continue;
-            ResourceLocation texture = getArmorTexture(stack, slot);
+            ResourceLocation texture = iafpatcher$getArmorTexture(stack, slot);
             if (texture != null) {
                 VertexConsumer vertexConsumer = bufferIn.getBuffer(RenderType.entityCutoutNoCull(texture));
                 model.renderToBuffer(matrixStackIn, vertexConsumer, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
             }
         }
+        ci.cancel();
     }
 
     @Unique
-    private static ResourceLocation getArmorTexture(ItemStack stack, EquipmentSlot slot) {
+    private static ResourceLocation iafpatcher$getArmorTexture(ItemStack stack, EquipmentSlot slot) {
         int ordinal = -1;
         if (!stack.isEmpty() && stack.getItem() instanceof ItemDragonArmor armorItem)
             ordinal = armorItem.type.ordinal();

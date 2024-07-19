@@ -34,7 +34,7 @@ public abstract class TitleScreenMixin extends Screen {
     private long fadeInStart;
 
     @Unique
-    private GuiGraphics context;
+    private GuiGraphics iafpatcher$context;
 
     protected TitleScreenMixin(Component title) {
         super(title);
@@ -56,7 +56,7 @@ public abstract class TitleScreenMixin extends Screen {
 
     @Inject(method = "render", at = @At("HEAD"))
     private void onRender(GuiGraphics p_282860_, int p_281753_, int p_283539_, float p_282628_, CallbackInfo ci) {
-        this.context = p_282860_;
+        this.iafpatcher$context = p_282860_;
     }
 
     @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/PanoramaRenderer;render(FF)V"))
@@ -65,11 +65,11 @@ public abstract class TitleScreenMixin extends Screen {
             instance.render(delta, alpha);
             return;
         }
-        TitleScreenRenderManager.renderBackground(this.context, this.width, this.height);
+        TitleScreenRenderManager.renderBackground(this.iafpatcher$context, this.width, this.height);
         float f = this.fading ? (float) (Util.getMillis() - this.fadeInStart) / 1000.0F : 1.0F;
         float g = this.fading ? Mth.clamp(f - 1.0F, 0.0F, 1.0F) : 1.0F;
         int i = Mth.ceil(g * 255.0F) << 24;
         if ((i & -67108864) != 0)
-            TitleScreenRenderManager.drawModName(this.context, this.height, i);
+            TitleScreenRenderManager.drawModName(this.iafpatcher$context, this.height, i);
     }
 }
