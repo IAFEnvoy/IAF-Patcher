@@ -8,6 +8,4 @@ This is a mod to fix some critical bugs and crashes in mod [Ice And Fire](https:
 
 3.The low capability of Title Screen and restore render fading.
 
-4.The unnecessary texture registering in dragon armor rendering.
-
 **Join our [Discord](https://discord.gg/NDzz2upqAk) to report bugs you want to fix**
