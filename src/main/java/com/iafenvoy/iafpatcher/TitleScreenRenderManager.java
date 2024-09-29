@@ -3,11 +3,12 @@ package com.iafenvoy.iafpatcher;
 import com.github.alexthe666.iceandfire.IceAndFire;
 import com.iafenvoy.iafpatcher.util.RandomHelper;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.*;
+import com.mojang.math.Matrix4f;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.SplashRenderer;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 import java.io.BufferedReader;
@@ -43,7 +44,7 @@ public class TitleScreenRenderManager {
         resetDrawnImages();
     }
 
-    public static SplashRenderer getSplash() {
+    public static String getSplash() {
         if (splashText == null)
             try {
                 BufferedReader bufferedReader = Minecraft.getInstance().getResourceManager().openAsReader(splash);
@@ -53,7 +54,7 @@ public class TitleScreenRenderManager {
                 splashText = new ArrayList<>();
             }
         if (splashText.isEmpty()) return null;
-        return new SplashRenderer(splashText.get(RandomHelper.nextInt(0, splashText.size() - 1)));
+        return splashText.get(RandomHelper.nextInt(0, splashText.size() - 1));
     }
 
     private static void resetDrawnImages() {
@@ -89,13 +90,14 @@ public class TitleScreenRenderManager {
         layerTick++;
     }
 
-    public static void renderBackground(GuiGraphics ms, int width, int height) {
+    public static void renderBackground(PoseStack ms, int width, int height) {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableBlend();
-        ms.blit(TABLE_TEXTURE, 0, 0, 0, 0, width, height, width, height);
-        ms.blit(BESTIARY_TEXTURE, 50, 0, 0, 0, width - 100, height, width - 100, height);
+
+        blit(ms, TABLE_TEXTURE, 0, 0, 0, 0, width, height, width, height);
+        blit(ms, BESTIARY_TEXTURE, 50, 0, 0, 0, width - 100, height, width - 100, height);
         if (isFlippingPage)
-            ms.blit(pageFlipTextures[Math.min(5, pageFlip)], 50, 0, 0, 0, width - 100, height, width - 100, height);
+            blit(ms, pageFlipTextures[Math.min(5, pageFlip)], 50, 0, 0, 0, width - 100, height, width - 100, height);
         else {
             int middleX = width / 2;
             int middleY = height / 5;
@@ -107,18 +109,18 @@ public class TitleScreenRenderManager {
                 RenderSystem.setShaderColor(1, 1, 1, globalAlpha);
                 int x = (int) (picture.x * widthScale) + middleX;
                 int y = (int) ((picture.y * heightScale) + middleY);
-                ms.blit(drawingTextures[picture.image], x, y, 0, 0, (int) imageScale, (int) imageScale, (int) imageScale, (int) imageScale);
+                blit(ms, drawingTextures[picture.image], x, y, 0, 0, (int) imageScale, (int) imageScale, (int) imageScale, (int) imageScale);
             }
             RenderSystem.disableBlend();
         }
     }
 
-    public static void drawModName(GuiGraphics ms, int height, int alphaFormatted) {
+    public static void drawModName(PoseStack ms, int height, int alphaFormatted) {
         int textColor = 0x00FFFFFF | alphaFormatted;
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableBlend();
-        ms.drawString(textRenderer, "Ice and Fire " + ChatFormatting.YELLOW + IceAndFire.VERSION, 2, height - 60, textColor);
-        ms.drawString(textRenderer, "IAF Patcher " + ChatFormatting.YELLOW + IceAndFirePatcher.VERSION, 2, height - 50, textColor);
+        textRenderer.draw(ms, "Ice and Fire " + ChatFormatting.YELLOW + IceAndFire.VERSION, 2, height - 60, textColor);
+        textRenderer.draw(ms, "IAF Patcher " + ChatFormatting.YELLOW + IceAndFirePatcher.VERSION, 2, height - 50, textColor);
     }
 
     private static class Picture {
@@ -133,6 +135,23 @@ public class TitleScreenRenderManager {
             this.y = y;
             this.alpha = alpha;
         }
+    }
+
+    public static void blit(PoseStack ms, ResourceLocation location, int x, int y, float u, float v, int width, int height, int textureWidth, int textureHeight) {
+        innerBlit(ms, location, x, x + width, y, y + height, u / textureWidth, (u + width) / textureWidth, v / textureHeight, (v + height) / textureHeight);
+    }
+
+    private static void innerBlit(PoseStack stack, ResourceLocation location, int x1, int x2, int y1, int y2, float u1, float u2, float v1, float v2) {
+        RenderSystem.setShaderTexture(0, location);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        Matrix4f var11 = stack.last().pose();
+        BufferBuilder var12 = Tesselator.getInstance().getBuilder();
+        var12.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+        var12.vertex(var11, x1, y1, 0).uv(u1, v1).endVertex();
+        var12.vertex(var11, x1, y2, 0).uv(u1, v2).endVertex();
+        var12.vertex(var11, x2, y2, 0).uv(u2, v2).endVertex();
+        var12.vertex(var11, x2, y1, 0).uv(u2, v1).endVertex();
+        BufferUploader.drawWithShader(var12.end());
     }
 }
 

@@ -2,9 +2,8 @@ package com.iafenvoy.iafpatcher.mixin;
 
 import com.github.alexthe666.iceandfire.IafConfig;
 import com.iafenvoy.iafpatcher.TitleScreenRenderManager;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.Util;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.SplashRenderer;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.renderer.PanoramaRenderer;
@@ -24,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class TitleScreenMixin extends Screen {
     @Shadow
     @Nullable
-    private SplashRenderer splash;
+    private String splash;
 
     @Shadow
     @Final
@@ -34,7 +33,7 @@ public abstract class TitleScreenMixin extends Screen {
     private long fadeInStart;
 
     @Unique
-    private GuiGraphics iafpatcher$context;
+    private PoseStack iafpatcher$context;
 
     protected TitleScreenMixin(Component title) {
         super(title);
@@ -43,9 +42,9 @@ public abstract class TitleScreenMixin extends Screen {
     @Inject(method = "init", at = @At("RETURN"))
     private void onInit(CallbackInfo ci) {
         if (!IafConfig.customMainMenu) return;
-        SplashRenderer renderer = TitleScreenRenderManager.getSplash();
-        if (renderer != null)
-            this.splash = renderer;
+        String text = TitleScreenRenderManager.getSplash();
+        if (text != null)
+            this.splash = text;
     }
 
     @Inject(method = "tick", at = @At("RETURN"))
@@ -55,8 +54,8 @@ public abstract class TitleScreenMixin extends Screen {
     }
 
     @Inject(method = "render", at = @At("HEAD"))
-    private void onRender(GuiGraphics p_282860_, int p_281753_, int p_283539_, float p_282628_, CallbackInfo ci) {
-        this.iafpatcher$context = p_282860_;
+    private void onRender(PoseStack p_96739_, int p_96740_, int p_96741_, float p_96742_, CallbackInfo ci) {
+        this.iafpatcher$context = p_96739_;
     }
 
     @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/PanoramaRenderer;render(FF)V"))
