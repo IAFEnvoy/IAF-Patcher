@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-@SuppressWarnings("removal")
 public class TitleScreenRenderManager {
     public static final ResourceLocation splash = new ResourceLocation(IceAndFire.MODID, "splashes.txt");
     public static final ResourceLocation[] pageFlipTextures;
