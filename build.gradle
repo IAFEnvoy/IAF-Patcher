@@ -171,6 +171,10 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:0.2.0"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.2.0")) {
+        jarJar.ranged(it, "[0.2.0,)")
+    }
 
     implementation fg.deobf("curse.maven:citadel-331936:5143956")
     implementation fg.deobf("curse.maven:ice-and-fire-dragons-264231:5122408")

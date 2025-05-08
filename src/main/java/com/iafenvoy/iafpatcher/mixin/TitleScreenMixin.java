@@ -2,6 +2,7 @@ package com.iafenvoy.iafpatcher.mixin;
 
 import com.github.alexthe666.iceandfire.IafConfig;
 import com.iafenvoy.iafpatcher.TitleScreenRenderManager;
+import com.llamalad7.mixinextras.injector.WrapWithCondition;
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.SplashRenderer;
@@ -33,9 +34,6 @@ public abstract class TitleScreenMixin extends Screen {
     @Shadow
     private long fadeInStart;
 
-    @Unique
-    private GuiGraphics iafpatcher$context;
-
     protected TitleScreenMixin(Component title) {
         super(title);
     }
@@ -54,22 +52,19 @@ public abstract class TitleScreenMixin extends Screen {
         TitleScreenRenderManager.tick();
     }
 
-    @Inject(method = "render", at = @At("HEAD"))
-    private void onRender(GuiGraphics p_282860_, int p_281753_, int p_283539_, float p_282628_, CallbackInfo ci) {
-        this.iafpatcher$context = p_282860_;
+    @WrapWithCondition(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/PanoramaRenderer;render(FF)V"))
+    private boolean cancelOriginalRender(PanoramaRenderer instance, float delta, float alpha) {
+        return !IafConfig.customMainMenu;
     }
 
-    @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/PanoramaRenderer;render(FF)V"))
-    private void onRenderBackground(PanoramaRenderer instance, float delta, float alpha) {
-        if (!IafConfig.customMainMenu) {
-            instance.render(delta, alpha);
-            return;
-        }
-        TitleScreenRenderManager.renderBackground(this.iafpatcher$context, this.width, this.height);
+    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/PanoramaRenderer;render(FF)V", shift = At.Shift.AFTER))
+    private void onRenderBackground(GuiGraphics context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+        if (!IafConfig.customMainMenu) return;
+        TitleScreenRenderManager.renderBackground(context, this.width, this.height);
         float f = this.fading ? (float) (Util.getMillis() - this.fadeInStart) / 1000.0F : 1.0F;
         float g = this.fading ? Mth.clamp(f - 1.0F, 0.0F, 1.0F) : 1.0F;
         int i = Mth.ceil(g * 255.0F) << 24;
         if ((i & -67108864) != 0)
-            TitleScreenRenderManager.drawModName(this.iafpatcher$context, this.height, i);
+            TitleScreenRenderManager.drawModName(context, this.height, i);
     }
 }
