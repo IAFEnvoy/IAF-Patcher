@@ -2,6 +2,7 @@ package com.iafenvoy.iafpatcher.mixin;
 
 import com.github.alexthe666.iceandfire.IafConfig;
 import com.iafenvoy.iafpatcher.TitleScreenRenderManager;
+import com.llamalad7.mixinextras.injector.WrapWithCondition;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.Util;
 import net.minecraft.client.gui.screens.Screen;
@@ -13,10 +14,8 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(TitleScreen.class)
@@ -31,10 +30,7 @@ public abstract class TitleScreenMixin extends Screen {
 
     @Shadow
     private long fadeInStart;
-
-    @Unique
-    private PoseStack iafpatcher$context;
-
+  
     protected TitleScreenMixin(Component title) {
         super(title);
     }
@@ -53,22 +49,18 @@ public abstract class TitleScreenMixin extends Screen {
         TitleScreenRenderManager.tick();
     }
 
-    @Inject(method = "render", at = @At("HEAD"))
-    private void onRender(PoseStack p_96739_, int p_96740_, int p_96741_, float p_96742_, CallbackInfo ci) {
-        this.iafpatcher$context = p_96739_;
-    }
+    @WrapWithCondition(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/PanoramaRenderer;render(FF)V"))
+    private boolean cancelOriginalRender(PanoramaRenderer instance, float delta, float alpha) {
+        return !IafConfig.customMainMenu;
 
-    @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/PanoramaRenderer;render(FF)V"))
-    private void onRenderBackground(PanoramaRenderer instance, float delta, float alpha) {
-        if (!IafConfig.customMainMenu) {
-            instance.render(delta, alpha);
-            return;
-        }
-        TitleScreenRenderManager.renderBackground(this.iafpatcher$context, this.width, this.height);
+    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/PanoramaRenderer;render(FF)V", shift = At.Shift.AFTER))
+    private void onRenderBackground(GuiGraphics context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+        if (!IafConfig.customMainMenu) return;
+        TitleScreenRenderManager.renderBackground(context, this.width, this.height);
         float f = this.fading ? (float) (Util.getMillis() - this.fadeInStart) / 1000.0F : 1.0F;
         float g = this.fading ? Mth.clamp(f - 1.0F, 0.0F, 1.0F) : 1.0F;
         int i = Mth.ceil(g * 255.0F) << 24;
         if ((i & -67108864) != 0)
-            TitleScreenRenderManager.drawModName(this.iafpatcher$context, this.height, i);
+            TitleScreenRenderManager.drawModName(context, this.height, i);
     }
 }
