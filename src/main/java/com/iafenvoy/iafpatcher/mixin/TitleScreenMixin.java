@@ -30,7 +30,7 @@ public abstract class TitleScreenMixin extends Screen {
 
     @Shadow
     private long fadeInStart;
-  
+
     protected TitleScreenMixin(Component title) {
         super(title);
     }
@@ -52,15 +52,16 @@ public abstract class TitleScreenMixin extends Screen {
     @WrapWithCondition(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/PanoramaRenderer;render(FF)V"))
     private boolean cancelOriginalRender(PanoramaRenderer instance, float delta, float alpha) {
         return !IafConfig.customMainMenu;
+    }
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/PanoramaRenderer;render(FF)V", shift = At.Shift.AFTER))
-    private void onRenderBackground(GuiGraphics context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+    private void onRenderBackground(PoseStack poseStack, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         if (!IafConfig.customMainMenu) return;
-        TitleScreenRenderManager.renderBackground(context, this.width, this.height);
+        TitleScreenRenderManager.renderBackground(poseStack, this.width, this.height);
         float f = this.fading ? (float) (Util.getMillis() - this.fadeInStart) / 1000.0F : 1.0F;
         float g = this.fading ? Mth.clamp(f - 1.0F, 0.0F, 1.0F) : 1.0F;
         int i = Mth.ceil(g * 255.0F) << 24;
         if ((i & -67108864) != 0)
-            TitleScreenRenderManager.drawModName(context, this.height, i);
+            TitleScreenRenderManager.drawModName(poseStack, this.height, i);
     }
 }
