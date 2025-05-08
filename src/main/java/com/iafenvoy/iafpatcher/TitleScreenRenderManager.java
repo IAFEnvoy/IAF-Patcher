@@ -2,14 +2,17 @@ package com.iafenvoy.iafpatcher;
 
 import com.github.alexthe666.iceandfire.IceAndFire;
 import com.iafenvoy.iafpatcher.util.RandomHelper;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
-import com.mojang.math.Matrix4f;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldVertexBufferUploader;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.vector.Matrix4f;
+import net.minecraft.util.text.TextFormatting;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 public class TitleScreenRenderManager {
     public static final ResourceLocation splash = new ResourceLocation(IceAndFire.MODID, "splashes.txt");
@@ -25,7 +29,7 @@ public class TitleScreenRenderManager {
     public static final ResourceLocation[] drawingTextures = new ResourceLocation[23];
     private static final ResourceLocation BESTIARY_TEXTURE = new ResourceLocation(IceAndFire.MODID, "textures/gui/main_menu/bestiary_menu.png");
     private static final ResourceLocation TABLE_TEXTURE = new ResourceLocation(IceAndFire.MODID, "textures/gui/main_menu/table.png");
-    private static final Font textRenderer = Minecraft.getInstance().font;
+    private static final FontRenderer textRenderer = Minecraft.getInstance().font;
     private static int layerTick;
     private static List<String> splashText;
     private static boolean isFlippingPage = false;
@@ -49,7 +53,7 @@ public class TitleScreenRenderManager {
         if (splashText == null)
             try {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Minecraft.getInstance().getResourceManager().getResource(splash).getInputStream()));
-                splashText = bufferedReader.lines().map(String::trim).filter((splashText) -> splashText.hashCode() != 125780783).toList();
+                splashText = bufferedReader.lines().map(String::trim).filter((splashText) -> splashText.hashCode() != 125780783).collect(Collectors.toList());
                 bufferedReader.close();
             } catch (IOException var8) {
                 splashText = new ArrayList<>();
@@ -91,8 +95,8 @@ public class TitleScreenRenderManager {
         layerTick++;
     }
 
-    public static void renderBackground(PoseStack ms, int width, int height) {
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+    public static void renderBackground(MatrixStack ms, int width, int height) {
+        RenderSystem.blendColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableBlend();
 
         blit(ms, TABLE_TEXTURE, 0, 0, 0, 0, width, height, width, height);
@@ -107,7 +111,7 @@ public class TitleScreenRenderManager {
             float imageScale = Math.min(widthScale, heightScale) * 192;
             RenderSystem.enableBlend();
             for (Picture picture : drawnPictures) {
-                RenderSystem.setShaderColor(1, 1, 1, globalAlpha);
+                RenderSystem.blendColor(1, 1, 1, globalAlpha);
                 int x = (int) (picture.x * widthScale) + middleX;
                 int y = (int) ((picture.y * heightScale) + middleY);
                 blit(ms, drawingTextures[picture.image], x, y, 0, 0, (int) imageScale, (int) imageScale, (int) imageScale, (int) imageScale);
@@ -116,12 +120,12 @@ public class TitleScreenRenderManager {
         }
     }
 
-    public static void drawModName(PoseStack ms, int height, int alphaFormatted) {
+    public static void drawModName(MatrixStack ms, int height, int alphaFormatted) {
         int textColor = 0x00FFFFFF | alphaFormatted;
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.blendColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableBlend();
-        textRenderer.draw(ms, "Ice and Fire " + ChatFormatting.GOLD + IceAndFire.VERSION, 2, height - 60, textColor);
-        textRenderer.draw(ms, "IAF Patcher " + ChatFormatting.GOLD + IceAndFirePatcher.VERSION, 2, height - 50, textColor);
+        textRenderer.draw(ms, "Ice and Fire " + TextFormatting.GOLD + IceAndFire.VERSION, 2, height - 60, textColor);
+        textRenderer.draw(ms, "IAF Patcher " + TextFormatting.GOLD + IceAndFirePatcher.VERSION, 2, height - 50, textColor);
     }
 
     private static class Picture {
@@ -138,22 +142,21 @@ public class TitleScreenRenderManager {
         }
     }
 
-    public static void blit(PoseStack ms, ResourceLocation location, int x, int y, float u, float v, int width, int height, int textureWidth, int textureHeight) {
+    public static void blit(MatrixStack ms, ResourceLocation location, int x, int y, float u, float v, int width, int height, int textureWidth, int textureHeight) {
         innerBlit(ms, location, x, x + width, y, y + height, u / textureWidth, (u + width) / textureWidth, v / textureHeight, (v + height) / textureHeight);
     }
 
-    private static void innerBlit(PoseStack stack, ResourceLocation location, int x1, int x2, int y1, int y2, float u1, float u2, float v1, float v2) {
-        RenderSystem.setShaderTexture(0, location);
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+    private static void innerBlit(MatrixStack stack, ResourceLocation location, int x1, int x2, int y1, int y2, float u1, float u2, float v1, float v2) {
+        Minecraft.getInstance().getTextureManager().bind(location);
         Matrix4f var11 = stack.last().pose();
-        BufferBuilder var12 = Tesselator.getInstance().getBuilder();
-        var12.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+        BufferBuilder var12 = Tessellator.getInstance().getBuilder();
+        var12.begin(7, DefaultVertexFormats.POSITION_TEX);
         var12.vertex(var11, x1, y1, 0).uv(u1, v1).endVertex();
         var12.vertex(var11, x1, y2, 0).uv(u1, v2).endVertex();
         var12.vertex(var11, x2, y2, 0).uv(u2, v2).endVertex();
         var12.vertex(var11, x2, y1, 0).uv(u2, v1).endVertex();
         var12.end();
-        BufferUploader.end(var12);
+        WorldVertexBufferUploader.end(var12);
     }
 }
 

@@ -11,7 +11,7 @@
     "EntityLightningDragonMixin"
   ],
   "client": [
-    "TitleScreenMixin",
+    "MainMenuScreenMixin",
     "ClientEventsMixin"
   ],
   "injectors": {

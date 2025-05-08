@@ -25,7 +25,7 @@ base {
 }
 
 java {
-    toolchain.languageVersion = JavaLanguageVersion.of(16)
+    toolchain.languageVersion = JavaLanguageVersion.of(8)
 }
 
 minecraft {
@@ -172,8 +172,8 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    implementation fg.deobf("curse.maven:citadel-331936:3537054")
-    implementation fg.deobf("curse.maven:ice-and-fire-dragons-264231:4614462")
+    implementation fg.deobf("curse.maven:citadel-331936:3441028")
+    implementation fg.deobf("curse.maven:ice-and-fire-dragons-264231:3948661")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
