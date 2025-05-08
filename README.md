@@ -1,5 +1,7 @@
 This is a mod to fix some critical bugs and crashes in mod [Ice And Fire](https://www.curseforge.com/minecraft/mc-mods/ice-and-fire-dragons).
 
+**1.20.1 branch is stopped maintaining, please use `IceAndFire Community Edition` instead.**
+
 #### Currently fixed:
 
 1.Dragon breath will cause severe lag on server.

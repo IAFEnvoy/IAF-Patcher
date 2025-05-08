@@ -3,9 +3,8 @@ package com.iafenvoy.iafpatcher.mixin;
 import com.github.alexthe666.iceandfire.IafConfig;
 import com.iafenvoy.iafpatcher.TitleScreenRenderManager;
 import com.llamalad7.mixinextras.injector.WrapWithCondition;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.Util;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.SplashRenderer;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.renderer.PanoramaRenderer;
@@ -23,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class TitleScreenMixin extends Screen {
     @Shadow
     @Nullable
-    private SplashRenderer splash;
+    private String splash;
 
     @Shadow
     @Final
@@ -31,7 +30,7 @@ public abstract class TitleScreenMixin extends Screen {
 
     @Shadow
     private long fadeInStart;
-
+  
     protected TitleScreenMixin(Component title) {
         super(title);
     }
@@ -39,9 +38,9 @@ public abstract class TitleScreenMixin extends Screen {
     @Inject(method = "init", at = @At("RETURN"))
     private void onInit(CallbackInfo ci) {
         if (!IafConfig.customMainMenu) return;
-        SplashRenderer renderer = TitleScreenRenderManager.getSplash();
-        if (renderer != null)
-            this.splash = renderer;
+        String text = TitleScreenRenderManager.getSplash();
+        if (text != null)
+            this.splash = text;
     }
 
     @Inject(method = "tick", at = @At("RETURN"))
@@ -53,7 +52,6 @@ public abstract class TitleScreenMixin extends Screen {
     @WrapWithCondition(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/PanoramaRenderer;render(FF)V"))
     private boolean cancelOriginalRender(PanoramaRenderer instance, float delta, float alpha) {
         return !IafConfig.customMainMenu;
-    }
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/PanoramaRenderer;render(FF)V", shift = At.Shift.AFTER))
     private void onRenderBackground(GuiGraphics context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
