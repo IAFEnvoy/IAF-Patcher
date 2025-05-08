@@ -13,11 +13,13 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+@SuppressWarnings("removal")
 public class TitleScreenRenderManager {
     public static final ResourceLocation splash = new ResourceLocation(IceAndFire.MODID, "splashes.txt");
     public static final ResourceLocation[] pageFlipTextures;
@@ -47,7 +49,7 @@ public class TitleScreenRenderManager {
     public static String getSplash() {
         if (splashText == null)
             try {
-                BufferedReader bufferedReader = Minecraft.getInstance().getResourceManager().openAsReader(splash);
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Minecraft.getInstance().getResourceManager().getResource(splash).getInputStream()));
                 splashText = bufferedReader.lines().map(String::trim).filter((splashText) -> splashText.hashCode() != 125780783).toList();
                 bufferedReader.close();
             } catch (IOException var8) {
@@ -119,8 +121,8 @@ public class TitleScreenRenderManager {
         int textColor = 0x00FFFFFF | alphaFormatted;
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableBlend();
-        textRenderer.draw(ms, "Ice and Fire " + ChatFormatting.YELLOW + IceAndFire.VERSION, 2, height - 60, textColor);
-        textRenderer.draw(ms, "IAF Patcher " + ChatFormatting.YELLOW + IceAndFirePatcher.VERSION, 2, height - 50, textColor);
+        textRenderer.draw(ms, "Ice and Fire " + ChatFormatting.GOLD + IceAndFire.VERSION, 2, height - 60, textColor);
+        textRenderer.draw(ms, "IAF Patcher " + ChatFormatting.GOLD + IceAndFirePatcher.VERSION, 2, height - 50, textColor);
     }
 
     private static class Picture {
@@ -151,7 +153,8 @@ public class TitleScreenRenderManager {
         var12.vertex(var11, x1, y2, 0).uv(u1, v2).endVertex();
         var12.vertex(var11, x2, y2, 0).uv(u2, v2).endVertex();
         var12.vertex(var11, x2, y1, 0).uv(u2, v1).endVertex();
-        BufferUploader.drawWithShader(var12.end());
+        var12.end();
+        BufferUploader.end(var12);
     }
 }
 
