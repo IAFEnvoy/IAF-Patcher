@@ -2,7 +2,6 @@ package com.iafenvoy.iafpatcher;
 
 import com.github.alexthe666.iceandfire.IceAndFire;
 import com.iafenvoy.iafpatcher.util.RandomHelper;
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -11,7 +10,6 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldVertexBufferUploader;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.text.TextFormatting;
 
 import java.io.BufferedReader;
@@ -95,14 +93,14 @@ public class TitleScreenRenderManager {
         layerTick++;
     }
 
-    public static void renderBackground(MatrixStack ms, int width, int height) {
+    public static void renderBackground(int width, int height) {
         RenderSystem.blendColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableBlend();
 
-        blit(ms, TABLE_TEXTURE, 0, 0, 0, 0, width, height, width, height);
-        blit(ms, BESTIARY_TEXTURE, 50, 0, 0, 0, width - 100, height, width - 100, height);
+        blit(TABLE_TEXTURE, 0, 0, 0, 0, width, height, width, height);
+        blit(BESTIARY_TEXTURE, 50, 0, 0, 0, width - 100, height, width - 100, height);
         if (isFlippingPage)
-            blit(ms, pageFlipTextures[Math.min(5, pageFlip)], 50, 0, 0, 0, width - 100, height, width - 100, height);
+            blit(pageFlipTextures[Math.min(5, pageFlip)], 50, 0, 0, 0, width - 100, height, width - 100, height);
         else {
             int middleX = width / 2;
             int middleY = height / 5;
@@ -114,18 +112,18 @@ public class TitleScreenRenderManager {
                 RenderSystem.blendColor(1, 1, 1, globalAlpha);
                 int x = (int) (picture.x * widthScale) + middleX;
                 int y = (int) ((picture.y * heightScale) + middleY);
-                blit(ms, drawingTextures[picture.image], x, y, 0, 0, (int) imageScale, (int) imageScale, (int) imageScale, (int) imageScale);
+                blit(drawingTextures[picture.image], x, y, 0, 0, (int) imageScale, (int) imageScale, (int) imageScale, (int) imageScale);
             }
             RenderSystem.disableBlend();
         }
     }
 
-    public static void drawModName(MatrixStack ms, int height, int alphaFormatted) {
+    public static void drawModName(int height, int alphaFormatted) {
         int textColor = 0x00FFFFFF | alphaFormatted;
         RenderSystem.blendColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableBlend();
-        textRenderer.draw(ms, "Ice and Fire " + TextFormatting.GOLD + IceAndFire.VERSION, 2, height - 60, textColor);
-        textRenderer.draw(ms, "IAF Patcher " + TextFormatting.GOLD + IceAndFirePatcher.VERSION, 2, height - 50, textColor);
+        textRenderer.draw("Ice and Fire " + TextFormatting.GOLD + IceAndFire.VERSION, 2, height - 60, textColor);
+        textRenderer.draw("IAF Patcher " + TextFormatting.GOLD + IceAndFirePatcher.VERSION, 2, height - 50, textColor);
     }
 
     private static class Picture {
@@ -142,19 +140,18 @@ public class TitleScreenRenderManager {
         }
     }
 
-    public static void blit(MatrixStack ms, ResourceLocation location, int x, int y, float u, float v, int width, int height, int textureWidth, int textureHeight) {
-        innerBlit(ms, location, x, x + width, y, y + height, u / textureWidth, (u + width) / textureWidth, v / textureHeight, (v + height) / textureHeight);
+    public static void blit(ResourceLocation location, int x, int y, float u, float v, int width, int height, int textureWidth, int textureHeight) {
+        innerBlit(location, x, x + width, y, y + height, u / textureWidth, (u + width) / textureWidth, v / textureHeight, (v + height) / textureHeight);
     }
 
-    private static void innerBlit(MatrixStack stack, ResourceLocation location, int x1, int x2, int y1, int y2, float u1, float u2, float v1, float v2) {
+    private static void innerBlit(ResourceLocation location, int x1, int x2, int y1, int y2, float u1, float u2, float v1, float v2) {
         Minecraft.getInstance().getTextureManager().bind(location);
-        Matrix4f var11 = stack.last().pose();
         BufferBuilder var12 = Tessellator.getInstance().getBuilder();
         var12.begin(7, DefaultVertexFormats.POSITION_TEX);
-        var12.vertex(var11, x1, y1, 0).uv(u1, v1).endVertex();
-        var12.vertex(var11, x1, y2, 0).uv(u1, v2).endVertex();
-        var12.vertex(var11, x2, y2, 0).uv(u2, v2).endVertex();
-        var12.vertex(var11, x2, y1, 0).uv(u2, v1).endVertex();
+        var12.vertex(x1, y1, 0).uv(u1, v1).endVertex();
+        var12.vertex(x1, y2, 0).uv(u1, v2).endVertex();
+        var12.vertex(x2, y2, 0).uv(u2, v2).endVertex();
+        var12.vertex(x2, y1, 0).uv(u2, v1).endVertex();
         var12.end();
         WorldVertexBufferUploader.end(var12);
     }
