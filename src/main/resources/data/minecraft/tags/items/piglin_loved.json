@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "iceandfire:gold_pile",
+    "iceandfire:gold_hippogryph_armor",
+    "iceandfire:dragonarmor_gold_body",
+    "iceandfire:dragonarmor_gold_head",
+    "iceandfire:dragonarmor_gold_neck",
+    "iceandfire:dragonarmor_gold_tail"
+  ]
+}
