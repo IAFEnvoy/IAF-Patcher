@@ -8,11 +8,15 @@
     "EntityDragonBaseMixin",
     "EntityFireDragonMixin",
     "EntityIceDragonMixin",
-    "EntityLightningDragonMixin"
+    "EntityLightningDragonMixin",
+    "memoryleak.DragonTabulaModelAnimatorFixMixin",
+    "memoryleak.SeaSerpentTabulaModelAnimatorFixMixin"
   ],
   "client": [
+    "ClientEventsMixin",
     "TitleScreenMixin",
-    "ClientEventsMixin"
+    "memoryleak.BipedModelFixMixin",
+    "memoryleak.NormalModelFixMixin"
   ],
   "injectors": {
     "defaultRequire": 1
