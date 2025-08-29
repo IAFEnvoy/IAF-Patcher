@@ -1,6 +1,7 @@
-package com.iafenvoy.iafpatcher;
+package com.iafenvoy.iafpatcher.misc;
 
 import com.github.alexthe666.iceandfire.IceAndFire;
+import com.iafenvoy.iafpatcher.IceAndFirePatcher;
 import com.iafenvoy.iafpatcher.util.RandomHelper;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.ChatFormatting;

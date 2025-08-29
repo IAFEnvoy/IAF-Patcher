@@ -12,6 +12,7 @@ This is a mod to fix some critical bugs and crashes in mod
 - **(1.20.1 only)** Gorgon will break all armor when kill you.
 - Model Animator won't clear cache after animate cause memory leak.
 - Pixie jar color not correct after rejoin world.
+- Hippogryphs will fly too high and suck.
 
 ## Enhancements
 

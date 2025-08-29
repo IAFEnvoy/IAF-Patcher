@@ -8,6 +8,7 @@
     "CitadelMixin",
     "EntityDragonBaseMixin",
     "EntityFireDragonMixin",
+    "EntityHippogryphMixin",
     "EntityIceDragonMixin",
     "EntityLightningDragonMixin",
     "PixieAIStealMixin",

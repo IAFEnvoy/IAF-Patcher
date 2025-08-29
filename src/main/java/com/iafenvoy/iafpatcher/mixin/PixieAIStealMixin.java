@@ -1,7 +1,7 @@
 package com.iafenvoy.iafpatcher.mixin;
 
 import com.github.alexthe666.iceandfire.entity.ai.PixieAISteal;
-import com.iafenvoy.iafpatcher.IafpTags;
+import com.iafenvoy.iafpatcher.misc.IafpTags;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

@@ -1,7 +1,7 @@
 package com.iafenvoy.iafpatcher.mixin;
 
 import com.github.alexthe666.iceandfire.IafConfig;
-import com.iafenvoy.iafpatcher.TitleScreenRenderManager;
+import com.iafenvoy.iafpatcher.misc.TitleScreenRenderManager;
 import com.llamalad7.mixinextras.injector.WrapWithCondition;
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;

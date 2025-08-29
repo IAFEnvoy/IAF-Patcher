@@ -1,4 +1,4 @@
-package com.iafenvoy.iafpatcher;
+package com.iafenvoy.iafpatcher.misc;
 
 import com.github.alexthe666.iceandfire.IceAndFire;
 import net.minecraft.core.registries.Registries;
