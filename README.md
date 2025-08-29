@@ -13,6 +13,7 @@ This is a mod to fix some critical bugs and crashes in mod
 - Model Animator won't clear cache after animate cause memory leak.
 - Pixie jar color not correct after rejoin world.
 - Hippogryphs will fly too high and suck.
+- Fire Dragon Bone Sword & Fire Dragon Steel Sword cannot cook drops.
 
 ## Enhancements
 

@@ -6,6 +6,7 @@
   "refmap": "iaf_patcher.refmap.json",
   "mixins": [
     "CitadelMixin",
+    "EnchantmentHelperMixin",
     "EntityDragonBaseMixin",
     "EntityFireDragonMixin",
     "EntityHippogryphMixin",
