@@ -10,6 +10,8 @@
     "EntityFireDragonMixin",
     "EntityIceDragonMixin",
     "EntityLightningDragonMixin",
+    "PixieAIStealMixin",
+    "TileEntityJarMixin",
     "memoryleak.DragonTabulaModelAnimatorFixMixin",
     "memoryleak.SeaSerpentTabulaModelAnimatorFixMixin"
   ],
