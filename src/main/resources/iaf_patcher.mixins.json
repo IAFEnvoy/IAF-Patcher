@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "iaf_patcher.refmap.json",
   "mixins": [
+    "CitadelMixin",
     "EntityDragonBaseMixin",
     "EntityFireDragonMixin",
     "EntityIceDragonMixin",
