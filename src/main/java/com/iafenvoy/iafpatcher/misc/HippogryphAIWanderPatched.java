@@ -39,7 +39,7 @@ public class HippogryphAIWanderPatched extends Goal {
                     return false;
                 } else {
                     this.xPosition = Vector3d.x;
-                    this.yPosition = Vector3d.y+ this.hippo.getRandom().nextIntBetweenInclusive(-4, 2);
+                    this.yPosition = Vector3d.y + this.hippo.getRandom().nextInt(-4, 2);
                     this.zPosition = Vector3d.z;
                     this.mustUpdate = false;
                     return true;
