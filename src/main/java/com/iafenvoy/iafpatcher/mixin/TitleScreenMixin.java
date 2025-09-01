@@ -3,9 +3,8 @@ package com.iafenvoy.iafpatcher.mixin;
 import com.github.alexthe666.iceandfire.IafConfig;
 import com.iafenvoy.iafpatcher.misc.TitleScreenRenderManager;
 import com.llamalad7.mixinextras.injector.WrapWithCondition;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.Util;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.SplashRenderer;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.renderer.PanoramaRenderer;
@@ -26,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class TitleScreenMixin extends Screen {
     @Shadow
     @Nullable
-    private SplashRenderer splash;
+    private String splash;
 
     @Shadow
     @Final
@@ -42,9 +41,9 @@ public abstract class TitleScreenMixin extends Screen {
     @Inject(method = "init", at = @At("RETURN"))
     private void onInit(CallbackInfo ci) {
         if (!IafConfig.customMainMenu) return;
-        SplashRenderer renderer = TitleScreenRenderManager.getSplash();
-        if (renderer != null)
-            this.splash = renderer;
+        String text = TitleScreenRenderManager.getSplash();
+        if (text != null)
+            this.splash = text;
     }
 
     @Inject(method = "tick", at = @At("RETURN"))
@@ -59,13 +58,13 @@ public abstract class TitleScreenMixin extends Screen {
     }
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/PanoramaRenderer;render(FF)V", shift = At.Shift.AFTER))
-    private void onRenderBackground(GuiGraphics context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+    private void onRenderBackground(PoseStack poseStack, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         if (!IafConfig.customMainMenu) return;
-        TitleScreenRenderManager.renderBackground(context, this.width, this.height);
+        TitleScreenRenderManager.renderBackground(poseStack, this.width, this.height);
         float f = this.fading ? (float) (Util.getMillis() - this.fadeInStart) / 1000.0F : 1.0F;
         float g = this.fading ? Mth.clamp(f - 1.0F, 0.0F, 1.0F) : 1.0F;
         int i = Mth.ceil(g * 255.0F) << 24;
         if ((i & -67108864) != 0)
-            TitleScreenRenderManager.drawModName(context, this.height, i);
+            TitleScreenRenderManager.drawModName(poseStack, this.height, i);
     }
 }
