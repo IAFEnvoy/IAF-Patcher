@@ -1,9 +1,9 @@
 package com.iafenvoy.iafpatcher.misc;
 
 import com.github.alexthe666.iceandfire.entity.EntityHippogryph;
-import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.ai.util.DefaultRandomPos;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.entity.ai.RandomPositionGenerator;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.util.math.vector.Vector3d;
 
 import java.util.EnumSet;
 
@@ -34,7 +34,7 @@ public class HippogryphAIWanderPatched extends Goal {
             if (!this.mustUpdate && this.hippo.getRandom().nextInt(this.executionChance) != 0) {
                 return false;
             } else {
-                Vec3 Vector3d = DefaultRandomPos.getPos(this.hippo, 10, 7);
+                Vector3d Vector3d = RandomPositionGenerator.getPos(this.hippo, 10, 7);
                 if (Vector3d == null) {
                     return false;
                 } else {
