@@ -1,11 +1,11 @@
 package com.iafenvoy.iafpatcher.misc;
 
 import com.github.alexthe666.iceandfire.IceAndFire;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.common.Tags;
 
 public final class IafpTags {
-    public static final TagKey<Item> PIXIE_STOLEN_BLACKLIST = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(IceAndFire.MODID, "pixie_stolen_blacklist"));
+    public static final Tags.IOptionalNamedTag<Item> PIXIE_STOLEN_BLACKLIST = ItemTags.createOptional(new ResourceLocation(IceAndFire.MODID, "pixie_stolen_blacklist"));
 }

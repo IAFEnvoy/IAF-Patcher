@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class EnchantmentHelperMixin {
     @Inject(method = "getItemEnchantmentLevel", at = @At("HEAD"), cancellable = true)
     private static void wrapFireAspect(Enchantment enchantment, ItemStack stack, CallbackInfoReturnable<Integer> cir) {
-        if (enchantment == Enchantments.FIRE_ASPECT && (stack.is(IafItemRegistry.DRAGONBONE_SWORD_FIRE.get()) || stack.is(IafItemRegistry.DRAGONSTEEL_FIRE_SWORD.get())))
+        if (enchantment == Enchantments.FIRE_ASPECT && (stack.is(IafItemRegistry.DRAGONBONE_SWORD_FIRE) || stack.is(IafItemRegistry.DRAGONSTEEL_FIRE_SWORD)))
             cir.setReturnValue(1);
     }
 }
