@@ -25,7 +25,7 @@ base {
 }
 
 java {
-    toolchain.languageVersion = JavaLanguageVersion.of(17)
+    toolchain.languageVersion = JavaLanguageVersion.of(16)
 }
 
 minecraft {
@@ -171,13 +171,9 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-    implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:0.2.0"))
-    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.2.0")) {
-        jarJar.ranged(it, "[0.2.0,)")
-    }
 
-    implementation fg.deobf("curse.maven:citadel-331936:3783096")
-    implementation fg.deobf("curse.maven:ice-and-fire-dragons-264231:5037775")
+    implementation fg.deobf("curse.maven:citadel-331936:3537054")
+    implementation fg.deobf("curse.maven:ice-and-fire-dragons-264231:4614462")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
