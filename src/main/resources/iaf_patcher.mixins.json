@@ -18,7 +18,7 @@
   ],
   "client": [
     "ClientEventsMixin",
-    "TitleScreenMixin",
+    "MainMenuScreenMixin",
     "memoryleak.BipedModelFixMixin",
     "memoryleak.NormalModelFixMixin"
   ],
