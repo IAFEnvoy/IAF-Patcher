@@ -3,7 +3,7 @@ package com.iafenvoy.iafpatcher.misc;
 import com.github.alexthe666.iceandfire.entity.EntityHippogryph;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.Vec3d;
 
 import java.util.EnumSet;
 
@@ -34,7 +34,7 @@ public class HippogryphAIWanderPatched extends Goal {
             if (!this.mustUpdate && this.hippo.getRandom().nextInt(this.executionChance) != 0) {
                 return false;
             } else {
-                Vector3d Vector3d = RandomPositionGenerator.getPos(this.hippo, 10, 7);
+                Vec3d Vector3d = RandomPositionGenerator.getPos(this.hippo, 10, 7);
                 if (Vector3d == null) {
                     return false;
                 } else {

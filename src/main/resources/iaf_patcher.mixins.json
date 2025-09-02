@@ -13,13 +13,14 @@
     "EntityIceDragonMixin",
     "EntityLightningDragonMixin",
     "PixieAIStealMixin",
-    "memoryleak.DragonTabulaModelAnimatorFixMixin",
     "memoryleak.SeaSerpentTabulaModelAnimatorFixMixin"
   ],
   "client": [
     "ClientEventsMixin",
     "MainMenuScreenMixin",
-    "memoryleak.BipedModelFixMixin",
+    "memoryleak.FireDragonTabulaModelAnimatorFixMixin",
+    "memoryleak.IceDragonTabulaModelAnimatorFixMixin",
+    "memoryleak.LightningTabulaDragonAnimatorFixMixin",
     "memoryleak.NormalModelFixMixin"
   ],
   "injectors": {
