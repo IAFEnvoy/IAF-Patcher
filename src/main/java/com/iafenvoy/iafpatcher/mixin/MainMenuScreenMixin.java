@@ -1,13 +1,16 @@
 package com.iafenvoy.iafpatcher.mixin;
 
 import com.github.alexthe666.iceandfire.IafConfig;
-import com.iafenvoy.iafpatcher.TitleScreenRenderManager;
+import com.iafenvoy.iafpatcher.misc.TitleScreenRenderManager;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.gui.screen.MainMenuScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.renderer.RenderSkybox;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@OnlyIn(Dist.CLIENT)
 @Mixin(MainMenuScreen.class)
 public abstract class MainMenuScreenMixin extends Screen {
     @Shadow

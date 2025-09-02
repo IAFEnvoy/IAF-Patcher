@@ -5,14 +5,22 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "iaf_patcher.refmap.json",
   "mixins": [
+    "CitadelMixin",
+    "EnchantmentHelperMixin",
     "EntityDragonBaseMixin",
     "EntityFireDragonMixin",
+    "EntityHippogryphMixin",
     "EntityIceDragonMixin",
-    "EntityLightningDragonMixin"
+    "EntityLightningDragonMixin",
+    "PixieAIStealMixin",
+    "memoryleak.DragonTabulaModelAnimatorFixMixin",
+    "memoryleak.SeaSerpentTabulaModelAnimatorFixMixin"
   ],
   "client": [
+    "ClientEventsMixin",
     "MainMenuScreenMixin",
-    "ClientEventsMixin"
+    "memoryleak.BipedModelFixMixin",
+    "memoryleak.NormalModelFixMixin"
   ],
   "injectors": {
     "defaultRequire": 1
