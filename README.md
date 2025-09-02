@@ -1,15 +1,22 @@
-This is a mod to fix some critical bugs and crashes in mod [Ice And Fire](https://www.curseforge.com/minecraft/mc-mods/ice-and-fire-dragons).
+## Ice And Fire Patcher
 
-**1.20.1 branch is stopped maintaining, please use `IceAndFire Community Edition` instead.**
+This is a mod to fix some critical bugs and crashes in mod
+[Ice And Fire](https://www.curseforge.com/minecraft/mc-mods/ice-and-fire-dragons).
 
-#### Currently fixed:
+## Currently fixed:
 
-1.Dragon breath will cause severe lag on server.
+- Citadel fetch patreon on main thread cause launching slowness. (Now run on standalone thread)
+- Dragon breath will cause severe lag on server.
+- Wrong particle render for dragon breath
+- The low capability of Title Screen and restore render fading.
+- **(1.20.1 only)** Gorgon will break all armor when kill you.
+- Model Animator won't clear cache after animate cause memory leak.
+- Pixie jar color not correct after rejoin world.
+- Hippogryphs will fly too high and suck.
+- Fire Dragon Bone Sword & Fire Dragon Steel Sword cannot cook drops.
 
-2.Wrong particle render for dragon breath
+## Enhancements
 
-3.The low capability of Title Screen and restore render fading.
-
-4.Gorgon will break all armor when kill you.
+- Add `iceandfire:pixie_stolen_blacklist` tag.
 
 **Join our [Discord](https://discord.gg/NDzz2upqAk) to report bugs you want to fix**
