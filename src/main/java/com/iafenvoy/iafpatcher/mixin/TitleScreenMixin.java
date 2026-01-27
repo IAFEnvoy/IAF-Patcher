@@ -20,6 +20,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+//FIXME::
 @OnlyIn(Dist.CLIENT)
 @Mixin(TitleScreen.class)
 public abstract class TitleScreenMixin extends Screen {
@@ -50,11 +51,6 @@ public abstract class TitleScreenMixin extends Screen {
     private void onTick(CallbackInfo ci) {
         if (!IafConfig.customMainMenu) return;
         TitleScreenRenderManager.tick();
-    }
-
-    @WrapWithCondition(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/PanoramaRenderer;render(FF)V"))
-    private boolean cancelOriginalRender(PanoramaRenderer instance, float delta, float alpha) {
-        return !IafConfig.customMainMenu;
     }
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/PanoramaRenderer;render(FF)V", shift = At.Shift.AFTER))
