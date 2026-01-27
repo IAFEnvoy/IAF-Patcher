@@ -9,7 +9,6 @@ This is a mod to fix some critical bugs and crashes in mod
 - Dragon breath will cause severe lag on server.
 - Wrong particle render for dragon breath
 - The low capability of Title Screen and restore render fading.
-- **(1.20.1 only)** Gorgon will break all armor when kill you.
 - Model Animator won't clear cache after animate cause memory leak.
 - Pixie jar color not correct after rejoin world.
 - Hippogryphs will fly too high and suck.
@@ -18,5 +17,6 @@ This is a mod to fix some critical bugs and crashes in mod
 ## Enhancements
 
 - Add `iceandfire:pixie_stolen_blacklist` tag.
+- Add some golden items into `minecraft:piglin_loved` tag to let piglin pick up them.
 
 **Join our [Discord](https://discord.gg/NDzz2upqAk) to report bugs you want to fix**

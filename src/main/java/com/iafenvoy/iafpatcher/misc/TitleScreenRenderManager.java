@@ -120,8 +120,8 @@ public class TitleScreenRenderManager {
         int textColor = 0x00FFFFFF | alphaFormatted;
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableBlend();
-        textRenderer.draw(ms, "Ice and Fire " + ChatFormatting.YELLOW + IceAndFire.VERSION, 2, height - 60, textColor);
-        textRenderer.draw(ms, "IAF Patcher " + ChatFormatting.YELLOW + IceAndFirePatcher.VERSION, 2, height - 50, textColor);
+        textRenderer.draw(ms, "Ice and Fire " + ChatFormatting.GOLD + IceAndFire.VERSION, 2, height - 60, textColor);
+        textRenderer.draw(ms, "IAF Patcher " + ChatFormatting.GOLD + IceAndFirePatcher.VERSION, 2, height - 50, textColor);
     }
 
     private static class Picture {
