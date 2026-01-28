@@ -1,7 +1,7 @@
 plugins {
     id("dev.kikugie.stonecutter")
     id("co.uzzu.dotenv.gradle") version "4.0.0"
-    id("net.neoforged.moddev") version "2.0.115" apply false
+    id("net.minecraftforge.gradle") version "[6.0.16,6.2)" apply false
     id("dev.kikugie.postprocess.jsonlang") version "2.1-beta.4" apply false
     id("me.modmuss50.mod-publish-plugin") version "0.8.+" apply false
 }
@@ -9,7 +9,6 @@ plugins {
 stonecutter active "1.19.2"
 
 stonecutter parameters {
-    constants.match(node.metadata.project.substringAfterLast('-'), "fabric", "neoforge", "forge")
     filters.include("**/*.fsh", "**/*.vsh")
 }
 

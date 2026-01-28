@@ -3,8 +3,7 @@ pluginManagement {
         mavenLocal()
         mavenCentral()
         gradlePluginPortal()
-        maven("https://maven.fabricmc.net/") { name = "Fabric" }
-        maven("https://maven.neoforged.net/releases/") { name = "NeoForged" }
+        maven("https://maven.minecraftforge.net/") { name = "Minecraft Forge" }
         maven("https://maven.kikugie.dev/snapshots") { name = "KikuGie" }
         maven("https://maven.kikugie.dev/releases") { name = "KikuGie Releases" }
         maven("https://maven.parchmentmc.org") { name = "ParchmentMC" }
@@ -18,15 +17,7 @@ plugins {
 
 stonecutter {
     create(rootProject) {
-        fun match(version: String){
-            vers(version, version).buildscript = "build.gradle.kts"
-        }
-
-        match("1.15.2")
-        match("1.16.5")
-        match("1.17.1")
-        match("1.18.2")
-        match("1.19.2")
+        versions("1.15.2", "1.16.5", "1.17.1", "1.18.2", "1.19.2")
 
         vcsVersion = "1.19.2"
     }

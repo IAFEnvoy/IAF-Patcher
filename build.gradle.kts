@@ -1,147 +1,143 @@
-import java.util.LinkedList
+buildscript {
+    repositories {
+        maven { url = uri("https://repo.spongepowered.org/repository/maven-public/") }
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.spongepowered:mixingradle:0.7-SNAPSHOT")
+    }
+}
 
 plugins {
-    id("net.neoforged.moddev.legacyforge")
-    id("dev.kikugie.postprocess.jsonlang")
+    eclipse
+    idea
+    id("net.minecraftforge.gradle")
     id("me.modmuss50.mod-publish-plugin")
 }
 
-version = "${property("mod.version")}-${property("deps.minecraft")}-forge"
-base.archivesName = property("mod.id") as String
+apply(plugin = "org.spongepowered.mixin")
 
-jsonlang {
-    languageDirectories = listOf("assets/${property("mod.id")}/lang")
-    prettyPrint = true
-}
+group = project.property("mod.group") as String
+version = project.property("mod.version") as String
 
-repositories {
-    maven("https://maven.parchmentmc.org") { name = "ParchmentMC" }
-    maven("https://cursemaven.com")
-}
-
-dependencies {
-    annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
-
-    modImplementation("curse.maven:citadel-331936:${property("deps.citadel")}")
-    modImplementation("curse.maven:ice-and-fire-dragons-264231:${property("deps.iceandfire")}")
-}
-
-legacyForge {
-    version = property("deps.minecraft") as String + "-" + property("deps.forge") as String
-    validateAccessTransformers = true
-
-    if (hasProperty("deps.parchment")) parchment {
-        val (mc, ver) = (property("deps.parchment") as String).split(':')
-        mappingsVersion = ver
-        minecraftVersion = mc
-    }
-
-    runs {
-        register("client") {
-            gameDirectory = file("run/")
-            client()
-        }
-        register("server") {
-            gameDirectory = file("run/")
-            server()
-        }
-    }
-
-    mods {
-        register(property("mod.id") as String) {
-            sourceSet(sourceSets["main"])
-        }
-    }
-    sourceSets["main"].resources.srcDir("src/main/generated")
-}
-
-mixin {
-    add(sourceSets.main.get(), "${property("mod.id")}-refmap.json")
-    config("${property("mod.id")}.mixins.json")
-}
-
-tasks {
-    processResources {
-        exclude("**/fabric.mod.json", "**/neoforge.mods.toml", "**/*.accesswidener")
-    }
-
-    named("createMinecraftArtifacts") {
-        dependsOn("stonecutterGenerate")
-    }
-
-    register<Copy>("buildAndCollect") {
-        group = "build"
-        from(jar.map { it.archiveFile })
-        into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
-        dependsOn("build")
-    }
-
-    jar {
-        manifest.attributes["MixinConfigs"] = "${project.property("mod.id")}.mixins.json"
-        finalizedBy("reobfJar")
-    }
+base {
+    archivesName.set(project.property("mod.id") as String)
 }
 
 java {
-    withSourcesJar()
-    val javaCompat = if (stonecutter.eval(stonecutter.current.version, ">=1.20.5")) JavaVersion.VERSION_21
-    else if (stonecutter.eval(stonecutter.current.version, ">=1.18")) JavaVersion.VERSION_17
-    else if (stonecutter.eval(stonecutter.current.version, ">=1.17")) JavaVersion.VERSION_16
-    else JavaVersion.VERSION_1_8
-    sourceCompatibility = javaCompat
-    targetCompatibility = javaCompat
+    toolchain.languageVersion.set(
+        JavaLanguageVersion.of(
+            when {
+                stonecutter.eval(stonecutter.current.version, ">=1.18") -> 17
+                stonecutter.eval(stonecutter.current.version, ">=1.17") -> 16
+                else -> 8
+            }
+        )
+    )
 }
 
-val supportedMinecraftVersions: LinkedList<String> = LinkedList()
-supportedMinecraftVersions.addAll(
-    (property("publish.additionalVersions") as String?)
-        ?.split(",")
-        ?.map { it.trim() }
-        ?.filter { it.isNotEmpty() }
-        ?: emptyList())
-supportedMinecraftVersions.add(stonecutter.current.version)
+minecraft {
+    mappings("official", project.property("deps.minecraft") as String)
+
+    enableIdeaPrepareRuns = true
+    copyIdeResources = true
+    generateRunFolders = true
+
+    runs {
+        // applies to all the run configs below
+        configureEach {
+            workingDirectory = "run"
+            property("forge.logging.markers", "REGISTRIES")
+            property("forge.logging.console.level", "debug")
+
+            mods {
+                create(project.property("mod.id") as String) {
+                    source(sourceSets.main.get())
+                }
+            }
+        }
+
+        create("client") {
+        }
+
+        create("server") {
+            args("--nogui")
+        }
+    }
+}
+
+configure<org.spongepowered.asm.gradle.plugins.MixinExtension> {
+    val modId = project.property("mod.id")
+    add(sourceSets.main.get(), "$modId.refmap.json")
+    config("$modId.mixins.json")
+}
+
+repositories {
+    maven { url = uri("https://cursemaven.com") }
+}
+
+dependencies {
+    minecraft("net.minecraftforge:forge:${project.property("deps.minecraft") as String}-${project.property("deps.forge") as String}")
+
+    annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
+
+    implementation(fg.deobf("curse.maven:citadel-331936:${project.property("deps.citadel")}"))
+    implementation(fg.deobf("curse.maven:ice-and-fire-dragons-264231:${project.property("deps.iceandfire")}"))
+}
+
+tasks.named<Jar>("jar") {
+    finalizedBy("reobfJar")
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    options.encoding = "UTF-8"
+}
 
 tasks.named<ProcessResources>("processResources") {
-    val props = HashMap<String, String>().apply {
-        this["mod_id"] = project.property("mod.id") as String
-        this["mod_name"] = project.property("mod.name") as String
-        this["mod_description"] = project.property("mod.description") as String
-        this["mod_version"] = project.property("mod.version") as String
-        this["mod_authors"] = project.property("mod.authors") as String
-        this["mod_repo_url"] = project.property("mod.repo_url") as String
-        this["mod_license"] = project.property("mod.license") as String
-        this["mod_logo"] = project.property("mod.logo") as String
-        this["supported_minecraft_versions"] = supportedMinecraftVersions.joinToString(",") { x -> "[${x}]" }
-    }
+    val replaceProperties = mapOf(
+        "minecraft_version" to project.property("deps.minecraft") as String,
+        "minecraft_version_range" to "[${project.property("deps.minecraft") as String}]",
+        "forge_version" to project.property("deps.forge") as String,
+        "forge_version_range" to "[0,)",
+        "loader_version_range" to "[0,)",
+        "mod_id" to project.property("mod.id") as String,
+        "mod_name" to project.property("mod.name"),
+        "mod_license" to project.property("mod.license"),
+        "mod_version" to project.property("mod.version"),
+        "mod_authors" to project.property("mod.authors"),
+        "mod_description" to project.property("mod.description")
+    )
 
-    filesMatching(listOf("fabric.mod.json", "META-INF/neoforge.mods.toml", "META-INF/mods.toml")) {
-        expand(props)
+    inputs.properties(replaceProperties)
+
+    filesMatching(listOf("META-INF/mods.toml", "pack.mcmeta")) {
+        expand(replaceProperties + mapOf("project" to project))
     }
 }
 
 publishMods {
-    file = tasks.named<org.gradle.jvm.tasks.Jar>("reobfJar").map { it.archiveFile.get() }
-    additionalFiles.from(tasks.named<org.gradle.jvm.tasks.Jar>("sourcesJar").map { it.archiveFile.get() })
+    file = tasks.jar.map { it.archiveFile.get() }
 
-    val modVersion = property("mod.version") as String
+    val modVersion = project.property("mod.version") as String
+    val minecraftVersion = project.property("deps.minecraft") as String
     type = if (modVersion.contains("alpha")) ALPHA
     else if (modVersion.contains("beta")) BETA
     else STABLE
 
-    displayName = "${property("mod.name")} $modVersion for ${stonecutter.current.version} Forge"
-    version = "${modVersion}-${property("deps.minecraft")}-forge"
+    displayName = "${project.property("mod.name")} $modVersion for ${stonecutter.current.version} Forge"
+    version = "${modVersion}-${minecraftVersion}-forge"
     changelog = provider { rootProject.file("CHANGELOG.md").readText() }
     modLoaders.add("forge")
 
     modrinth {
-        projectId = property("publish.modrinth") as String
+        projectId = project.property("publish.modrinth") as String
         accessToken = env.MODRINTH_API_KEY.orNull()
-        minecraftVersions.addAll(supportedMinecraftVersions)
+        minecraftVersions.add(minecraftVersion)
     }
 
     curseforge {
-        projectId = property("publish.curseforge") as String
+        projectId = project.property("publish.curseforge") as String
         accessToken = env.CURSEFORGE_API_KEY.orNull()
-        minecraftVersions.addAll(supportedMinecraftVersions)
+        minecraftVersions.add(minecraftVersion)
     }
 }
