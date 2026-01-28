@@ -1,6 +1,7 @@
 package com.iafenvoy.iafpatcher.mixin;
 
-import com.github.alexthe666.iceandfire.IafConfig;
+//? >=1.17 {
+/*import com.github.alexthe666.iceandfire.IafConfig;
 import com.iafenvoy.iafpatcher.misc.TitleScreenRenderManager;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.Util;
@@ -10,7 +11,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -18,12 +18,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-//FIXME::
 @OnlyIn(Dist.CLIENT)
 @Mixin(TitleScreen.class)
 public abstract class TitleScreenMixin extends Screen {
     @Shadow
-    @Nullable
     private String splash;
 
     @Shadow
@@ -62,3 +60,4 @@ public abstract class TitleScreenMixin extends Screen {
             TitleScreenRenderManager.drawModName(poseStack, this.height, i);
     }
 }
+*/

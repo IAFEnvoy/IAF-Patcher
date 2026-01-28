@@ -1,9 +1,15 @@
 package com.iafenvoy.iafpatcher.misc;
 
 import com.github.alexthe666.iceandfire.entity.EntityHippogryph;
-import net.minecraft.world.entity.ai.goal.Goal;
+//? >=1.17 {
+/*import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.phys.Vec3;
+*///?} else {
+import net.minecraft.entity.ai.RandomPositionGenerator;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.util.math.vector.Vector3d;
+//?}
 
 import java.util.EnumSet;
 
@@ -34,13 +40,17 @@ public class HippogryphAIWanderPatched extends Goal {
             if (!this.mustUpdate && this.hippo.getRandom().nextInt(this.executionChance) != 0) {
                 return false;
             } else {
-                Vec3 Vector3d = DefaultRandomPos.getPos(this.hippo, 10, 7);
-                if (Vector3d == null) {
+                //? >=1.17 {
+                /*Vec3 vec3 = DefaultRandomPos.getPos(this.hippo, 10, 7);
+                *///?} else {
+                Vector3d vec3 = RandomPositionGenerator.getPos(this.hippo, 10, 7);
+                //?}
+                if (vec3 == null) {
                     return false;
                 } else {
-                    this.xPosition = Vector3d.x;
-                    this.yPosition = Vector3d.y+ this.hippo.getRandom().nextIntBetweenInclusive(-4, 2);
-                    this.zPosition = Vector3d.z;
+                    this.xPosition = vec3.x;
+                    this.yPosition = vec3.y + /*? >=1.19 {*//*this.hippo.getRandom().nextIntBetweenInclusive(-4, 2)*//*?} else >=1.18 {*//*this.hippo.getRandom().nextInt(-4, 2)*//*?} else {*/this.hippo.getRandom().nextInt(7) - 4/*?}*/;
+                    this.zPosition = vec3.z;
                     this.mustUpdate = false;
                     return true;
                 }

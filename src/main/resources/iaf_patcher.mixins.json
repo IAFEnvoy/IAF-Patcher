@@ -2,6 +2,7 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.iafenvoy.iafpatcher.mixin",
+  "plugin": "com.iafenvoy.iafpatcher.IAFPMixinPlugin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "iaf_patcher.refmap.json",
   "mixins": [
@@ -9,19 +10,15 @@
     "EnchantmentHelperMixin",
     "EntityDragonBaseMixin",
     "EntityFireDragonMixin",
-    "EntityHippogryphMixin",
     "EntityIceDragonMixin",
     "EntityLightningDragonMixin",
-    "PixieAIStealMixin",
-    "TileEntityJarMixin",
-    "memoryleak.DragonTabulaModelAnimatorFixMixin",
-    "memoryleak.SeaSerpentTabulaModelAnimatorFixMixin"
+    "PixieAIStealMixin"
   ],
   "client": [
-    "ClientEventsMixin",
-    "TitleScreenMixin",
     "memoryleak.BipedModelFixMixin",
-    "memoryleak.NormalModelFixMixin"
+    "memoryleak.DragonTabulaModelAnimatorFixMixin",
+    "memoryleak.NormalModelFixMixin",
+    "memoryleak.SeaSerpentTabulaModelAnimatorFixMixin"
   ],
   "injectors": {
     "defaultRequire": 1

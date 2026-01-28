@@ -29,7 +29,8 @@ java {
         JavaLanguageVersion.of(
             when {
                 stonecutter.eval(stonecutter.current.version, ">=1.18") -> 17
-                stonecutter.eval(stonecutter.current.version, ">=1.17") -> 16
+                //We should use 17 on 1.17 due to wrong mixin config in I&F
+                stonecutter.eval(stonecutter.current.version, ">=1.17") -> 17
                 else -> 8
             }
         )
@@ -133,11 +134,13 @@ publishMods {
         projectId = project.property("publish.modrinth") as String
         accessToken = env.MODRINTH_API_KEY.orNull()
         minecraftVersions.add(minecraftVersion)
+        requires("ice-and-fire-dragons")
     }
 
     curseforge {
         projectId = project.property("publish.curseforge") as String
         accessToken = env.CURSEFORGE_API_KEY.orNull()
         minecraftVersions.add(minecraftVersion)
+        requires("ice-and-fire-dragons")
     }
 }
