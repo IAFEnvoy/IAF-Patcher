@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
         ModelTroll.class,
 }, remap = false)
 public class NormalModelFixMixin {
-    @Shadow
+    @Shadow(remap = false)
     @Final
     private ModelAnimator animator;
 

@@ -15,6 +15,7 @@
     "PixieAIStealMixin"
   ],
   "client": [
+    "ClientEventsMixin",
     "memoryleak.BipedModelFixMixin",
     "memoryleak.DragonTabulaModelAnimatorFixMixin",
     "memoryleak.NormalModelFixMixin",

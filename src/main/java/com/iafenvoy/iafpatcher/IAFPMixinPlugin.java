@@ -18,7 +18,6 @@ public class IAFPMixinPlugin implements IMixinConfigPlugin {
         /*mixins.add("TileEntityJarMixin");
         *///?}
         if (FMLEnvironment.dist == Dist.CLIENT) {
-            mixins.add("ClientEventsMixin");
             //? >=1.17 {
             /*mixins.add("TitleScreenMixin");
             *///?} else {
@@ -44,7 +43,7 @@ public class IAFPMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String s, String s1) {
-        return false;
+        return true;
     }
 
     @Override

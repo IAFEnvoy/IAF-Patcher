@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @OnlyIn(Dist.CLIENT)
-@Mixin(value = ClientEvents.class,remap = false)
+@Mixin(value = ClientEvents.class, remap = false)
 public class ClientEventsMixin {
     @Inject(method = "onGuiOpened", at = @At("HEAD"), cancellable = true)
     private void onTitleSceenHook(CallbackInfo ci) {

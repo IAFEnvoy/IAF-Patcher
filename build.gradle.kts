@@ -18,7 +18,7 @@ plugins {
 apply(plugin = "org.spongepowered.mixin")
 
 group = project.property("mod.group") as String
-version = project.property("mod.version") as String
+version = (project.property("mod.version") as String) + "-" + (project.property("deps.minecraft") as String)
 
 base {
     archivesName.set(project.property("mod.id") as String)
