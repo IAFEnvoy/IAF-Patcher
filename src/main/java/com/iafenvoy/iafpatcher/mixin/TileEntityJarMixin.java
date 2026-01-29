@@ -1,7 +1,7 @@
 package com.iafenvoy.iafpatcher.mixin;
 
 //? >=1.18 {
-/*import com.github.alexthe666.iceandfire.entity.tile.TileEntityJar;
+import com.github.alexthe666.iceandfire.entity.tile.TileEntityJar;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -20,4 +20,3 @@ public class TileEntityJarMixin extends BlockEntity {
         return this.saveWithoutMetadata();
     }
 }
-*/

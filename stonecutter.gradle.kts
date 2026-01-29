@@ -6,7 +6,7 @@ plugins {
     id("me.modmuss50.mod-publish-plugin") version "0.8.+" apply false
 }
 
-stonecutter active "1.16.5"
+stonecutter active "1.19.2"
 
 stonecutter parameters {
     filters.include("**/*.fsh", "**/*.vsh")

@@ -1,7 +1,7 @@
 package com.iafenvoy.iafpatcher.mixin;
 
 //? >=1.17 {
-/*import com.github.alexthe666.iceandfire.IafConfig;
+import com.github.alexthe666.iceandfire.IafConfig;
 import com.iafenvoy.iafpatcher.misc.TitleScreenRenderManager;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.Util;
@@ -60,4 +60,3 @@ public abstract class TitleScreenMixin extends Screen {
             TitleScreenRenderManager.drawModName(poseStack, this.height, i);
     }
 }
-*/

@@ -1,7 +1,7 @@
 package com.iafenvoy.iafpatcher.mixin;
 
 //? >=1.17 {
-/*import com.github.alexthe666.iceandfire.entity.EntityHippogryph;
+import com.github.alexthe666.iceandfire.entity.EntityHippogryph;
 import com.github.alexthe666.iceandfire.entity.ai.HippogryphAIMate;
 import com.github.alexthe666.iceandfire.entity.ai.HippogryphAITarget;
 import com.github.alexthe666.iceandfire.entity.ai.HippogryphAITargetItems;
@@ -17,10 +17,10 @@ import net.minecraft.world.entity.ai.goal.target.OwnerHurtTargetGoal;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 //? >=1.19 {
-/^import com.github.alexthe666.iceandfire.datagen.tags.IafItemTags;
-^///?} else {
-import net.minecraft.world.item.Items;
-//?}
+import com.github.alexthe666.iceandfire.datagen.tags.IafItemTags;
+//?} else {
+/*import net.minecraft.world.item.Items;
+*///?}
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
@@ -44,7 +44,7 @@ public abstract class EntityHippogryphMixin extends TamableAnimal {
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, LivingEntity.class, 6.0F));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(5, new HippogryphAIMate(hippogryph, 1.0D));
-        this.goalSelector.addGoal(6, new TemptGoal(this, 1.0D, /^? >=1.19 {^//^Ingredient.of(IafItemTags.TEMPT_HIPPOGRYPH)^//^?} else {^/Ingredient.of(Items.RABBIT, Items.COOKED_RABBIT)/^?}^/, false));
+        this.goalSelector.addGoal(6, new TemptGoal(this, 1.0D, /*? >=1.19 {*/Ingredient.of(IafItemTags.TEMPT_HIPPOGRYPH)/*?} else {*//*Ingredient.of(Items.RABBIT, Items.COOKED_RABBIT)*//*?}*/, false));
         this.goalSelector.addGoal(8, new HippogryphAIWanderPatched(hippogryph, 1.0D));
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
@@ -53,4 +53,4 @@ public abstract class EntityHippogryphMixin extends TamableAnimal {
         this.targetSelector.addGoal(5, new HippogryphAITarget<>(hippogryph, LivingEntity.class, false, entity -> !(entity instanceof AbstractHorse) && DragonUtils.isAlive(entity)));
         this.targetSelector.addGoal(5, new HippogryphAITarget<>(hippogryph, Player.class, 350, false, entity -> entity instanceof Player player && !player.isCreative()));
     }
-}*/
+}

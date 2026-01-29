@@ -1,7 +1,7 @@
 package com.iafenvoy.iafpatcher.mixin;
 
 //? <=1.16.5 {
-import com.github.alexthe666.iceandfire.entity.EntityHippogryph;
+/*import com.github.alexthe666.iceandfire.entity.EntityHippogryph;
 import com.github.alexthe666.iceandfire.entity.ai.DragonAIRide;
 import com.github.alexthe666.iceandfire.entity.ai.HippogryphAIMate;
 import com.github.alexthe666.iceandfire.entity.ai.HippogryphAITarget;
@@ -48,4 +48,4 @@ public abstract class EntityHippogryphMixinOld extends TameableEntity {
         this.targetSelector.addGoal(5, new HippogryphAITarget<>(hippogryph, LivingEntity.class, false, entity -> !(entity instanceof AbstractHorseEntity) && DragonUtils.isAlive(entity)));
         this.targetSelector.addGoal(5, new HippogryphAITarget<>(hippogryph, PlayerEntity.class, 350, false, entity -> entity instanceof PlayerEntity && !((PlayerEntity) entity).isCreative()));
     }
-}
+}*/

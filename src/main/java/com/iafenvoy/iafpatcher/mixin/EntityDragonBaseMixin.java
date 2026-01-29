@@ -2,12 +2,12 @@ package com.iafenvoy.iafpatcher.mixin;
 
 import com.github.alexthe666.iceandfire.entity.EntityDragonBase;
 //? >=1.17 {
-/*import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.util.Mth;
-*///?} else {
-import net.minecraft.entity.LivingEntity;
+//?} else {
+/*import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
-//?}
+*///?}
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,7 +24,7 @@ public class EntityDragonBaseMixin {
         assert entity != null;
         float distX = (float) (entity.getX() - instance.getX());
         float distZ = (float) (entity.getZ() - instance.getZ());
-        int breathTicks = /*? >=1.17 {*//*Mth*//*?} else {*/MathHelper/*?}*/.clamp(this.fireTicks, 0, 40);
+        int breathTicks = /*? >=1.17 {*/Mth/*?} else {*//*MathHelper*//*?}*/.clamp(this.fireTicks, 0, 40);
         instance.stimulateFire(instance.getX() + distX * breathTicks / 40, entity.getY(), instance.getZ() + distZ * breathTicks / 40, 1);
     }
 }

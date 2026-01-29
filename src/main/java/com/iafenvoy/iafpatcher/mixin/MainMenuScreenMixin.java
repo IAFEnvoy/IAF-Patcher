@@ -1,7 +1,7 @@
 package com.iafenvoy.iafpatcher.mixin;
 
 //? <=1.16.5 {
-import com.github.alexthe666.iceandfire.IafConfig;
+/*import com.github.alexthe666.iceandfire.IafConfig;
 import com.iafenvoy.iafpatcher.misc.TitleScreenRenderManagerOld;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.gui.screen.MainMenuScreen;
@@ -67,4 +67,4 @@ public abstract class MainMenuScreenMixin extends Screen {
         if ((i & -67108864) != 0)
             TitleScreenRenderManagerOld.drawModName(this.iafpatcher$poseStack, this.height, i);
     }
-}
+}*/

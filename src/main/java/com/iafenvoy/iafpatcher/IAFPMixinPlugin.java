@@ -15,20 +15,20 @@ public class IAFPMixinPlugin implements IMixinConfigPlugin {
     public List<String> getMixins() {
         List<String> mixins = new LinkedList<>();
         //? >=1.18 {
-        /*mixins.add("TileEntityJarMixin");
-        *///?}
+        mixins.add("TileEntityJarMixin");
+        //?}
         if (FMLEnvironment.dist == Dist.CLIENT) {
             //? >=1.17 {
-            /*mixins.add("TitleScreenMixin");
-            *///?} else {
-            mixins.add("MainMenuScreenMixin");
-            //?}
+            mixins.add("TitleScreenMixin");
+            //?} else {
+            /*mixins.add("MainMenuScreenMixin");
+            *///?}
         }
         //? >=1.17 {
-            /*mixins.add("EntityHippogryphMixin");
-        *///?} else {
-        mixins.add("EntityHippogryphMixinOld");
-        //?}
+            mixins.add("EntityHippogryphMixin");
+        //?} else {
+        /*mixins.add("EntityHippogryphMixinOld");
+        *///?}
         return mixins;
     }
 

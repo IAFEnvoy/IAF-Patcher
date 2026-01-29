@@ -1,7 +1,7 @@
 package com.iafenvoy.iafpatcher.misc;
 
 //? >=1.17 {
-/*import com.github.alexthe666.iceandfire.IceAndFire;
+import com.github.alexthe666.iceandfire.IceAndFire;
 import com.iafenvoy.iafpatcher.IceAndFirePatcher;
 import com.iafenvoy.iafpatcher.util.RandomHelper;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 //? <=1.18.2 {
-import java.io.InputStreamReader;
-//?}
+/*import java.io.InputStreamReader;
+*///?}
 
 @SuppressWarnings("removal")
 public class TitleScreenRenderManager {
@@ -54,10 +54,10 @@ public class TitleScreenRenderManager {
         if (splashText == null)
             try {
                 //? >=1.19 {
-                /^BufferedReader bufferedReader = Minecraft.getInstance().getResourceManager().openAsReader(splash);
-                ^///?} else {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Minecraft.getInstance().getResourceManager().getResource(splash).getInputStream()));
-                //?}
+                BufferedReader bufferedReader = Minecraft.getInstance().getResourceManager().openAsReader(splash);
+                //?} else {
+                /*BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Minecraft.getInstance().getResourceManager().getResource(splash).getInputStream()));
+                *///?}
                 splashText = bufferedReader.lines().map(String::trim).filter((splashText) -> splashText.hashCode() != 125780783).toList();
                 bufferedReader.close();
             } catch (IOException var8) {
@@ -162,11 +162,10 @@ public class TitleScreenRenderManager {
         var12.vertex(var11, x2, y2, 0).uv(u2, v2).endVertex();
         var12.vertex(var11, x2, y1, 0).uv(u2, v1).endVertex();
         //? >=1.19 {
-        /^BufferUploader.drawWithShader(var12.end());
-        ^///?} else {
-        var12.end();
+        BufferUploader.drawWithShader(var12.end());
+        //?} else {
+        /*var12.end();
         BufferUploader.end(var12);
-        //?}
+        *///?}
     }
 }
-*/
