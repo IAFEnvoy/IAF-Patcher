@@ -20,11 +20,15 @@ apply(plugin = "org.spongepowered.mixin")
 group = project.property("mod.group") as String
 version = (project.property("mod.version") as String) + "-" + (project.property("deps.minecraft") as String)
 
-val patchRegression = providers.gradleProperty("patchRegression").isPresent
+val featureRegression = providers.gradleProperty("featureRegression").isPresent
+val patchRegression = featureRegression || providers.gradleProperty("patchRegression").isPresent
 if (patchRegression) {
     sourceSets.main.get().java.srcDir(rootProject.file("src/patchRegression/java"))
     if (stonecutter.current.version == "1.20.1") {
         sourceSets.main.get().java.srcDir(rootProject.file("src/patchRegression-1.20.1/java"))
+    }
+    if (featureRegression && stonecutter.eval(stonecutter.current.version, ">=1.18")) {
+        sourceSets.main.get().java.srcDir(rootProject.file("src/featureRegression/java"))
     }
 }
 
@@ -53,7 +57,11 @@ minecraft {
     runs {
         // applies to all the run configs below
         configureEach {
-            workingDirectory = if (patchRegression) rootProject.file("build/patch-regression/${stonecutter.current.version}").path else "run"
+            workingDirectory = when {
+                featureRegression -> rootProject.file("build/feature-regression/${stonecutter.current.version}").path
+                patchRegression -> rootProject.file("build/patch-regression/${stonecutter.current.version}").path
+                else -> "run"
+            }
             property("forge.logging.markers", "REGISTRIES")
             property("forge.logging.console.level", "debug")
             if (patchRegression) {
@@ -158,17 +166,12 @@ publishMods {
     changelog = provider { rootProject.file("CHANGELOG.md").readText() }
     modLoaders.add("forge")
 
-    modrinth {
-        projectId = project.property("publish.modrinth") as String
-        accessToken = env.MODRINTH_API_KEY.orNull()
-        minecraftVersions.add(minecraftVersion)
-        requires("ice-and-fire-dragons")
-    }
-
     curseforge {
         projectId = project.property("publish.curseforge") as String
         accessToken = env.CURSEFORGE_API_KEY.orNull()
         minecraftVersions.add(minecraftVersion)
         requires("ice-and-fire-dragons")
+        serverRequired = true
+        clientRequired = true
     }
 }

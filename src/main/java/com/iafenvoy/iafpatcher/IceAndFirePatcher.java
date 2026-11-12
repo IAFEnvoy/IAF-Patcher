@@ -1,9 +1,11 @@
 package com.iafenvoy.iafpatcher;
 
-
+import com.iafenvoy.iafpatcher.config.IAFPConfig;
 import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 //? >=1.18 {
 import com.mojang.logging.LogUtils;
 import org.slf4j.Logger;
@@ -31,6 +33,7 @@ public class IceAndFirePatcher {
     }
 
     public IceAndFirePatcher() {
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, IAFPConfig.SPEC, "iaf_patcher-server.toml");
         LOGGER.info("Trying to patch Ice And Fire");
     }
 }

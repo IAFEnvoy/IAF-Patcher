@@ -1,0 +1,5 @@
+[features]
+# Normal dragon meals resume growth after a sickly dragon meal.
+dragonMealRestoresGrowth = true
+# Ignore both upward and downward bubble-column motion while riding a hippocampus.
+hippocampusBubbleColumnImmunity = false

@@ -6,3 +6,7 @@
 - Clamp invalid or stale Hydra head indices before processing damage.
 - Remove the duplicate collision query and push pass for slow multipart entities.
 - Apply the Cyclops movement slowdown after breaking trees.
+- Backport breeding, healing and item-based taming food tags to Minecraft 1.16.5 and 1.18.2. Use the same tag names as the native support in 1.19.2 and 1.20.1, including dropped-food selection and pixie pickup effects.
+- Fix pixies ignoring custom food tags when searching for dropped items on Minecraft 1.19.2 and 1.20.1.
+- Add a server config option for normal dragon meals to resume growth after sickly dragon meals, enabled by default.
+- Add optional hippocampus immunity to bubble columns, disabled by default.

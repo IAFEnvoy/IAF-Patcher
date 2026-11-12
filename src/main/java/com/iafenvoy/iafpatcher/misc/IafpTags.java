@@ -23,8 +23,18 @@ import net.minecraftforge.common.Tags;
 @SuppressWarnings("removal")
 public final class IafpTags {
     //? >=1.18 {
-    public static final TagKey<Item> PIXIE_STOLEN_BLACKLIST = TagKey.create(/*? >=1.20 {*//*Registries.ITEM*//*?} else {*/Registry.ITEM_REGISTRY/*?}*/, new ResourceLocation(IceAndFire.MODID, "pixie_stolen_blacklist"));
+    public static final TagKey<Item> PIXIE_STOLEN_BLACKLIST = create("pixie_stolen_blacklist");
     //?} else {
-    /*public static final Tags.IOptionalNamedTag<Item> PIXIE_STOLEN_BLACKLIST = ItemTags.createOptional(new ResourceLocation(IceAndFire.MODID, "pixie_stolen_blacklist"));
+    /*public static final Tags.IOptionalNamedTag<Item> PIXIE_STOLEN_BLACKLIST = create("pixie_stolen_blacklist");
+    *///?}
+
+    //? >=1.18 {
+    static TagKey<Item> create(String path) {
+        return TagKey.create(/*? >=1.20 {*//*Registries.ITEM*//*?} else {*/Registry.ITEM_REGISTRY/*?}*/, new ResourceLocation(IceAndFire.MODID, path));
+    }
+    //?} else {
+    /*static Tags.IOptionalNamedTag<Item> create(String path) {
+        return ItemTags.createOptional(new ResourceLocation(IceAndFire.MODID, path));
+    }
     *///?}
 }

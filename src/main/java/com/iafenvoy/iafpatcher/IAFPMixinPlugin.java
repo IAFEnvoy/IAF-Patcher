@@ -17,6 +17,14 @@ public class IAFPMixinPlugin implements IMixinConfigPlugin {
         //? >=1.18 {
         mixins.add("TileEntityJarMixin");
         //?}
+        //? <1.19 {
+        /*mixins.add("food.LegacyAmphithereFoodMixin");
+        mixins.add("food.LegacyHippocampusFoodMixin");
+        mixins.add("food.LegacyHippogryphFoodMixin");
+        mixins.add("food.LegacyCockatriceFoodMixin");
+        mixins.add("food.LegacyPixieFoodMixin");
+        mixins.add("food.LegacyPixiePickupFoodMixin");
+        *///?}
         if (FMLEnvironment.dist == Dist.CLIENT) {
             //? >=1.17 {
             mixins.add("TitleScreenMixin");

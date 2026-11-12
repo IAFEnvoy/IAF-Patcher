@@ -27,7 +27,8 @@ public final class MixinApplicationSmoke {
                     "entity.ai.CockatriceAITargetItems", "entity.ai.DragonAITargetItems",
                     "entity.ai.DreadAIRideHorse", "entity.ai.MyrmexAIFindMate",
                     "entity.ai.MyrmexAIForageForItems", "entity.ai.MyrmexAIPickupBabies",
-                    "entity.ai.PixieAIPickupItem"
+                    "entity.ai.PixieAIPickupItem", "entity.EntityAmphithere", "entity.EntityHippocampus",
+                    "entity.EntityHippogryph", "entity.EntityCockatrice", "entity.EntityPixie"
             };
             for (String target : targets) Class.forName("com.github.alexthe666.iceandfire." + target);
             for (String optional : new String[]{"HippogryphAITargetItems", "DeathwormAITargetItems"}) {
@@ -40,6 +41,12 @@ public final class MixinApplicationSmoke {
                 result += regression.getMethod("run", Object.class).invoke(null, server);
             } catch (ClassNotFoundException ignored) {
                 result += "Behavior regression suite is available for 1.20.1 only.\n";
+            }
+            try {
+                Class<?> regression = Class.forName("com.iafenvoy.iafpatcher.regression.FeatureRegression");
+                result += regression.getMethod("run", Object.class).invoke(null, server);
+            } catch (ClassNotFoundException ignored) {
+                // Feature checks are only included with -PfeatureRegression on 1.18.2 and later.
             }
         } catch (Throwable failure) {
             if (failure instanceof InvocationTargetException) failure = ((InvocationTargetException) failure).getCause();

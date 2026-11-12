@@ -1,7 +1,7 @@
 ## Ice And Fire Patcher
 
 This is a mod to fix some critical bugs and crashes in mod
-[Ice And Fire](https://www.curseforge.com/minecraft/mc-mods/ice-and-fire-dragons).
+[Ice And Fire](https://www.curseforge.com/minecraft/mc-mods/ice-and-fire-dragons), also add some new features.
 
 Current maintaining versions: 1.16.5, 1.18.2, 1.19.2, 1.20.1.
 
@@ -25,11 +25,12 @@ Current maintaining versions: 1.16.5, 1.18.2, 1.19.2, 1.20.1.
 - Slow multipart entities perform the same collision query twice per tick.
 - Cyclops tree-breaking slowdown discards the updated movement vector.
 
-See the [simple patch report and test instructions](docs/simple-patches-2026-11-12.md) for version coverage and validation limits.
-
 ## Enhancements
 
 - Add `iceandfire:pixie_stolen_blacklist` tag.
 - Add some golden items into `minecraft:piglin_loved` tag to let piglin pick up them.
+- Backport breeding, healing and item-based taming food tags to 1.16.5 and 1.18.2, matching the native tags in 1.19.2 and 1.20.1.
+- Allow normal dragon meals to resume growth after sickly dragon meals (configurable, enabled by default).
+- Add optional hippocampus immunity to bubble columns (disabled by default).
 
 **Join our [Discord](https://discord.gg/NDzz2upqAk) to report bugs you want to fix**
