@@ -12,7 +12,15 @@
     "EntityFireDragonMixin",
     "EntityIceDragonMixin",
     "EntityLightningDragonMixin",
-    "PixieAIStealMixin"
+    "PixieAIStealMixin",
+    "CyclopsMovementMixin",
+    "HydraHeadIndexMixin",
+    "MultipartCollisionMixin",
+    "ai.DragonAIMateMixin",
+    "ai.PixieAIFleeMixin",
+    "ai.SearchCooldownMixin",
+    "ai.SheepFollowCyclopsMixin",
+    "ai.WatchClosestIgnoreRiderMixin"
   ],
   "client": [
     "ClientEventsMixin",

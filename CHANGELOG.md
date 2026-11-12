@@ -1,0 +1,8 @@
+- Fix AI searches missing refresh ticks on Minecraft 1.18.2–1.20.1. Use independent four-tick search deadlines on all four supported versions, including recovery when world time moves backward.
+- Fix dragon mating using the wrong continuation method.
+- Fix sheep stopping their follow goal while the Cyclops is alive.
+- Fix pixies stopping their flee goal before reaching their hiding place.
+- Initialize the look goal's observer and exclude its passengers and vehicles.
+- Clamp invalid or stale Hydra head indices before processing damage.
+- Remove the duplicate collision query and push pass for slow multipart entities.
+- Apply the Cyclops movement slowdown after breaking trees.

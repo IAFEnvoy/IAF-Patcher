@@ -1,0 +1,2585 @@
+{
+  "review_date": "2026-11-12",
+  "method": "Static inspection of configured dependency bytecode through Vineflower 1.12.0, compared with CE fixes. No game reproduction or performance benchmarks in this review.",
+  "patcher_commit": "1b8c9b78c39abcfdb2b59276f995f79e180c5514",
+  "ce_fix_commit": "8dbab70ac171fbd53d1f8389e2f362b37536b1da",
+  "versions": {
+    "1.16.5": {
+      "minecraft": "1.16.5",
+      "curse_file_id": "4614457",
+      "original_jar": "C:\\Users\\tanks\\.gradle\\caches\\modules-2\\files-2.1\\curse.maven\\ice-and-fire-dragons-264231\\4614457\\5c5f01f1273f52be48fbcff6487e9d0f1e3a7ae0\\ice-and-fire-dragons-264231-4614457.jar",
+      "mapped_jar": "C:\\Users\\tanks\\.gradle\\caches\\forge_gradle\\deobf_dependencies\\curse\\maven\\ice-and-fire-dragons-264231\\4614457_mapped_official_1.16.5\\ice-and-fire-dragons-264231-4614457_mapped_official_1.16.5.jar",
+      "original_sha256": "29e66bd0199169649f6de4e4b0ef00a67555eb348f10b8d01794c20d67f128c8",
+      "implementation_version": "2.1.12-1.16.5-patch-1",
+      "selected_class_count": 225,
+      "evidence": {
+        "ride_control": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/message/MessageDragonControl.java",
+            "declaration_line": 61,
+            "matches": [
+              {
+                "line": 70,
+                "excerpt": "if (ServerEvents.isRidingOrBeingRiddenBy(entity, player)) {"
+              },
+              {
+                "line": 74,
+                "excerpt": "dragon.setControlState(message.controlState);"
+              },
+              {
+                "line": 77,
+                "excerpt": "dragon.setPos(message.getPosX(), message.getPosY(), message.getPosZ());"
+              },
+              {
+                "line": 81,
+                "excerpt": "hippo.setControlState(message.controlState);"
+              },
+              {
+                "line": 84,
+                "excerpt": "hippo.setPos(message.getPosX(), message.getPosY(), message.getPosZ());"
+              },
+              {
+                "line": 88,
+                "excerpt": "hippo.setControlState(message.controlState);"
+              },
+              {
+                "line": 91,
+                "excerpt": "hippo.setPos(message.getPosX(), message.getPosY(), message.getPosZ());"
+              },
+              {
+                "line": 94,
+                "excerpt": "deathworm.setControlState(message.controlState);"
+              },
+              {
+                "line": 95,
+                "excerpt": "deathworm.setPos(message.getPosX(), message.getPosY(), message.getPosZ());"
+              },
+              {
+                "line": 99,
+                "excerpt": "amphi.setControlState(message.controlState);"
+              },
+              {
+                "line": 102,
+                "excerpt": "amphi.setPos(message.getPosX(), message.getPosY(), message.getPosZ());"
+              }
+            ]
+          }
+        ],
+        "multipart_damage": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/message/MessageMultipartInteract.java",
+            "declaration_line": 36,
+            "matches": [
+              {
+                "line": 48,
+                "excerpt": "if (dist < 100.0) {"
+              },
+              {
+                "line": 49,
+                "excerpt": "if (message.dmg > 0.0F) {"
+              },
+              {
+                "line": 50,
+                "excerpt": "mob.hurt(DamageSource.mobAttack(player), message.dmg);"
+              }
+            ]
+          }
+        ],
+        "multipart_hit": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/message/MessagePlayerHitMultipart.java",
+            "declaration_line": 40,
+            "matches": [
+              {
+                "line": 52,
+                "excerpt": "if (dist < 100.0) {"
+              },
+              {
+                "line": 53,
+                "excerpt": "player.attack(mob);"
+              },
+              {
+                "line": 55,
+                "excerpt": "((EntityHydra)mob).triggerHeadFlags(message.extraData);"
+              }
+            ]
+          }
+        ],
+        "hydra_head_index": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/EntityHydra.java",
+            "declaration_line": 378,
+            "matches": [
+              {
+                "line": 379,
+                "excerpt": "if (this.lastHitHead > this.getHeadCount()) {"
+              },
+              {
+                "line": 384,
+                "excerpt": "this.headDamageTracker[headIndex] = this.headDamageTracker[headIndex] + amount;"
+              },
+              {
+                "line": 385,
+                "excerpt": "if (this.headDamageTracker[headIndex] > this.headDamageThreshold && (this.getSeveredHead() == -1 || this.getSeveredHead() >= this.getHeadCount())) {"
+              },
+              {
+                "line": 386,
+                "excerpt": "this.headDamageTracker[headIndex] = 0.0F;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/EntityHydra.java",
+            "declaration_line": 487,
+            "matches": [
+              {
+                "line": 488,
+                "excerpt": "this.lastHitHead = index;"
+              }
+            ]
+          }
+        ],
+        "lectern_buttons": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/inventory/ContainerLectern.java",
+            "declaration_line": 116,
+            "matches": [
+              {
+                "line": 125,
+                "excerpt": "pages[0] = EnumBestiaryPages.values()[Math.min(EnumBestiaryPages.values().length, this.possiblePagesInt[0])];"
+              },
+              {
+                "line": 131,
+                "excerpt": "pages[1] = EnumBestiaryPages.values()[Math.min(EnumBestiaryPages.values().length, this.possiblePagesInt[1])];"
+              },
+              {
+                "line": 137,
+                "excerpt": "pages[2] = EnumBestiaryPages.values()[Math.min(EnumBestiaryPages.values().length, this.possiblePagesInt[2])];"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/inventory/ContainerLectern.java",
+            "declaration_line": 144,
+            "matches": [
+              {
+                "line": 163,
+                "excerpt": "if (this.possiblePagesInt[id] > 0 && !itemstack.isEmpty()) {"
+              }
+            ]
+          }
+        ],
+        "lectern_lifetime": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityLectern.java",
+            "declaration_line": 210,
+            "matches": [
+              {
+                "line": 211,
+                "excerpt": "return true;"
+              }
+            ]
+          }
+        ],
+        "forge_tick": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 160,
+            "matches": [
+              {
+                "line": 161,
+                "excerpt": "return this.cookTime > 0;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 187,
+            "matches": [
+              {
+                "line": 198,
+                "excerpt": "BlockDragonforgeCore.setState(this.fireType, this.prevAssembled, this.level, this.worldPosition);"
+              },
+              {
+                "line": 208,
+                "excerpt": "this.cookTime--;"
+              },
+              {
+                "line": 218,
+                "excerpt": "this.cookTime++;"
+              }
+            ]
+          }
+        ],
+        "forge_state": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/block/BlockDragonforgeCore.java",
+            "declaration_line": 40,
+            "matches": [
+              {
+                "line": 42,
+                "excerpt": "keepInventory = true;"
+              },
+              {
+                "line": 65,
+                "excerpt": "keepInventory = false;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/block/BlockDragonforgeCore.java",
+            "declaration_line": 118,
+            "matches": [
+              {
+                "line": 121,
+                "excerpt": "InventoryHelper.dropContents(worldIn, pos, (TileEntityDragonforge)tileentity);"
+              },
+              {
+                "line": 123,
+                "excerpt": "worldIn.removeBlockEntity(pos);"
+              }
+            ]
+          }
+        ],
+        "forge_output": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 267,
+            "matches": [
+              {
+                "line": 279,
+                "excerpt": "if (!outputStack.isEmpty() && !outputStack.sameItem(forgeRecipeOutput)) {"
+              },
+              {
+                "line": 283,
+                "excerpt": "int calculatedOutputCount = outputStack.getCount() + forgeRecipeOutput.getCount();"
+              },
+              {
+                "line": 284,
+                "excerpt": "return calculatedOutputCount <= this.getMaxStackSize() && calculatedOutputCount <= outputStack.getMaxStackSize();"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 293,
+            "matches": [
+              {
+                "line": 302,
+                "excerpt": "outputStack.grow(output.getCount());"
+              }
+            ]
+          }
+        ],
+        "forge_persistence": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 142,
+            "matches": [
+              {
+                "line": 146,
+                "excerpt": "this.cookTime = compound.getInt(\"CookTime\");"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 149,
+            "matches": [
+              {
+                "line": 151,
+                "excerpt": "compound.putInt(\"CookTime\", (short)this.cookTime);"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 360,
+            "matches": [
+              {
+                "line": 364,
+                "excerpt": "this.cookTime = Math.min(this.getMaxCookTime() + 1, this.cookTime + i);"
+              },
+              {
+                "line": 374,
+                "excerpt": "this.lastDragonFlameTimer = 40;"
+              }
+            ]
+          }
+        ],
+        "recipe_copies": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/recipe/DragonForgeRecipe.java",
+            "declaration_line": 75,
+            "matches": [
+              {
+                "line": 76,
+                "excerpt": "return this.result;"
+              }
+            ]
+          }
+        ],
+        "dragon_target": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/ai/DragonAITarget.java",
+            "declaration_line": 25,
+            "matches": [
+              {
+                "line": 34,
+                "excerpt": "if (this.target != null && !this.target.getClass().equals(this.dragon.getClass())) {"
+              },
+              {
+                "line": 35,
+                "excerpt": "if (!super.canUse()) {"
+              }
+            ]
+          }
+        ],
+        "dragon_mate": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/ai/DragonAIMate.java",
+            "declaration_line": 44,
+            "matches": [
+              {
+                "line": 44,
+                "excerpt": "public boolean continueExecuting() {"
+              },
+              {
+                "line": 45,
+                "excerpt": "return this.targetMate.isAlive() && this.targetMate.isInLove() && this.spawnBabyDelay < 60;"
+              }
+            ]
+          }
+        ],
+        "cyclops_sheep": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/ai/EntitySheepAIFollowCyclops.java",
+            "declaration_line": 49,
+            "matches": [
+              {
+                "line": 50,
+                "excerpt": "if (this.cyclops.isAlive()) {"
+              }
+            ]
+          }
+        ],
+        "ignore_rider": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/ai/EntityAIWatchClosestIgnoreRider.java",
+            "declaration_line": 11,
+            "matches": [
+              {
+                "line": 12,
+                "excerpt": "super(entity, type, dist);"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/ai/EntityAIWatchClosestIgnoreRider.java",
+            "declaration_line": 15,
+            "matches": [
+              {
+                "line": 16,
+                "excerpt": "return super.canUse() && this.lookAt != null && isRidingOrBeingRiddenBy(this.lookAt, this.mob);"
+              }
+            ]
+          }
+        ],
+        "pixie_flee": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/ai/PixieAIFlee.java",
+            "declaration_line": 81,
+            "matches": [
+              {
+                "line": 82,
+                "excerpt": "return this.hidePlace != null && this.pixie.distanceToSqr(this.hidePlace.add(0.5, 0.5, 0.5)) < 2.0;"
+              }
+            ]
+          }
+        ],
+        "scepter": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/item/ItemCockatriceScepter.java",
+            "declaration_line": 50,
+            "matches": [
+              {
+                "line": 51,
+                "excerpt": "if (this.specialWeaponDmg > 0) {"
+              },
+              {
+                "line": 52,
+                "excerpt": "stack.hurtAndBreak(this.specialWeaponDmg, livingEntity, player -> player.broadcastBreakEvent(livingEntity.getUsedItemHand()));"
+              },
+              {
+                "line": 53,
+                "excerpt": "this.specialWeaponDmg = 0;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/item/ItemCockatriceScepter.java",
+            "declaration_line": 60,
+            "matches": [
+              {
+                "line": 61,
+                "excerpt": "return 1;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/item/ItemCockatriceScepter.java",
+            "declaration_line": 131,
+            "matches": [
+              {
+                "line": 140,
+                "excerpt": "this.specialWeaponDmg++;"
+              }
+            ]
+          }
+        ],
+        "scepter_nbt": [],
+        "statue_render": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/client/render/entity/RenderStoneStatue.java",
+            "declaration_line": 63,
+            "matches": [
+              {
+                "line": 64,
+                "excerpt": "EntityModel model = new PigModel();"
+              },
+              {
+                "line": 80,
+                "excerpt": "if (this.hollowEntityMap.get(entityIn.getTrappedEntityTypeString()) == null) {"
+              },
+              {
+                "line": 84,
+                "excerpt": "build.load(entityIn.getTrappedTag());"
+              },
+              {
+                "line": 89,
+                "excerpt": "fakeEntity = this.hollowEntityMap.putIfAbsent(entityIn.getTrappedEntityTypeString(), build);"
+              },
+              {
+                "line": 92,
+                "excerpt": "fakeEntity = this.hollowEntityMap.get(entityIn.getTrappedEntityTypeString());"
+              }
+            ]
+          }
+        ],
+        "podium_inventory": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityPodium.java",
+            "declaration_line": 92,
+            "matches": [
+              {
+                "line": 100,
+                "excerpt": "IceAndFire.sendMSGToAll(new MessageUpdatePodium(this.getBlockPos().asLong(), (ItemStack)this.stacks.get(0)));"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityPodium.java",
+            "declaration_line": 134,
+            "matches": [
+              {
+                "line": 135,
+                "excerpt": "this.stacks.clear();"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityPodium.java",
+            "declaration_line": 166,
+            "matches": [
+              {
+                "line": 167,
+                "excerpt": "return ItemStack.EMPTY;"
+              }
+            ]
+          }
+        ],
+        "summoning": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/item/ItemSummoningCrystal.java",
+            "declaration_line": 87,
+            "matches": [
+              {
+                "line": 101,
+                "excerpt": "if (id != null && !context.getLevel().isClientSide) {"
+              },
+              {
+                "line": 121,
+                "excerpt": "boolean flag2 = false;"
+              },
+              {
+                "line": 122,
+                "excerpt": "if (!flag && data != null && context.getLevel().isClientSide) {"
+              },
+              {
+                "line": 125,
+                "excerpt": "serverWorld.setChunkForced(pos.x, pos.z, true);"
+              },
+              {
+                "line": 154,
+                "excerpt": "stack.setTag(new CompoundNBT());"
+              }
+            ]
+          }
+        ],
+        "worm_path": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/pathfinding/NodeProcessorDeathWorm.java",
+            "declaration_line": 76,
+            "matches": [
+              {
+                "line": 84,
+                "excerpt": "return PathNodeType.BREACH;"
+              },
+              {
+                "line": 90,
+                "excerpt": "BlockState blockstate1 = this.level.getBlockState(blockpos$mutable);"
+              },
+              {
+                "line": 91,
+                "excerpt": "return this.isPassable(blockstate1) ? PathNodeType.WATER : PathNodeType.BLOCKED;"
+              }
+            ]
+          }
+        ],
+        "bird_flock": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/util/StymphalianBirdFlock.java",
+            "declaration_line": 67,
+            "matches": [
+              {
+                "line": 68,
+                "excerpt": "if (!this.members.isEmpty() && (this.leader == null || !this.leader.isAlive())) {"
+              },
+              {
+                "line": 69,
+                "excerpt": "this.leader = this.members.get(this.random.nextInt(this.members.size()));"
+              }
+            ]
+          }
+        ],
+        "multipart_collision": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/EntityMutlipartPart.java",
+            "declaration_line": 119,
+            "matches": [
+              {
+                "line": 146,
+                "excerpt": "this.collideWithNearbyEntities();"
+              },
+              {
+                "line": 158,
+                "excerpt": "this.collideWithNearbyEntities();"
+              }
+            ]
+          }
+        ],
+        "dragon_prey_side": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/EntityDragonBase.java",
+            "declaration_line": 1770,
+            "matches": [
+              {
+                "line": 1775,
+                "excerpt": "if (this.getAnimation() == ANIMATION_SHAKEPREY && this.getAnimationTick() > 55 && prey != null) {"
+              },
+              {
+                "line": 1776,
+                "excerpt": "prey.hurt(DamageSource.mobAttack(this), prey instanceof PlayerEntity ? 17.0F : (float)this.getAttribute(Attributes.ATTACK_DAMAGE).getValue() * 4.0F);"
+              },
+              {
+                "line": 1777,
+                "excerpt": "prey.stopRiding();"
+              }
+            ]
+          }
+        ],
+        "frozen_egg": [
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityEggInIce.java",
+            "declaration_line": 52,
+            "matches": [
+              {
+                "line": 54,
+                "excerpt": "this.type = EnumDragonEgg.values()[tag.getByte(\"Color\")];"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.16.5/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityEggInIce.java",
+            "declaration_line": 76,
+            "matches": [
+              {
+                "line": 76,
+                "excerpt": "public CompoundNBT getUpdateTag() {"
+              }
+            ]
+          }
+        ]
+      },
+      "global_modulo_goals": [
+        "AmphithereAIFleePlayer",
+        "AmphithereAITargetItems",
+        "CockatriceAITargetItems",
+        "DeathwormAITargetItems",
+        "DragonAITargetItems",
+        "DreadAIRideHorse",
+        "HippogryphAITargetItems",
+        "MyrmexAIFindMate",
+        "MyrmexAIForageForItems",
+        "MyrmexAIPickupBabies",
+        "PixieAIFlee",
+        "PixieAIPickupItem"
+      ],
+      "bestiary_readLines_count": 2,
+      "mapped_sha256": "3f5143d802a5ca9dadc774609cc6ad7ad2f84e9afe5b9ac0365b225b06326457"
+    },
+    "1.18.2": {
+      "minecraft": "1.18.2",
+      "curse_file_id": "5037775",
+      "original_jar": "C:\\Users\\tanks\\.gradle\\caches\\modules-2\\files-2.1\\curse.maven\\ice-and-fire-dragons-264231\\5037775\\a4630af26a3220d874af061edd4c4a732d400542\\ice-and-fire-dragons-264231-5037775.jar",
+      "mapped_jar": "C:\\Users\\tanks\\.gradle\\caches\\forge_gradle\\deobf_dependencies\\curse\\maven\\ice-and-fire-dragons-264231\\5037775_mapped_official_1.18.2\\ice-and-fire-dragons-264231-5037775_mapped_official_1.18.2.jar",
+      "original_sha256": "d2cdb16b490601fd7a651ff0f7bd453f5b7fecb518712c35d73214e416ce8c80",
+      "implementation_version": "2.1.13-1.18.2+build.beta-3",
+      "selected_class_count": 224,
+      "evidence": {
+        "ride_control": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/message/MessageDragonControl.java",
+            "declaration_line": 61,
+            "matches": [
+              {
+                "line": 70,
+                "excerpt": "if (ServerEvents.isRidingOrBeingRiddenBy(entity, player)) {"
+              },
+              {
+                "line": 73,
+                "excerpt": "dragon.setControlState(message.controlState);"
+              },
+              {
+                "line": 77,
+                "excerpt": "hippo.setControlState(message.controlState);"
+              },
+              {
+                "line": 81,
+                "excerpt": "hippo.setControlState(message.controlState);"
+              },
+              {
+                "line": 84,
+                "excerpt": "deathworm.setControlState(message.controlState);"
+              },
+              {
+                "line": 85,
+                "excerpt": "deathworm.setPos(message.getPosX(), message.getPosY(), message.getPosZ());"
+              },
+              {
+                "line": 87,
+                "excerpt": "amphi.setControlState(message.controlState);"
+              }
+            ]
+          }
+        ],
+        "multipart_damage": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/message/MessageMultipartInteract.java",
+            "declaration_line": 36,
+            "matches": [
+              {
+                "line": 48,
+                "excerpt": "if (dist < 100.0) {"
+              },
+              {
+                "line": 49,
+                "excerpt": "if (message.dmg > 0.0F) {"
+              },
+              {
+                "line": 50,
+                "excerpt": "mob.hurt(DamageSource.mobAttack(player), message.dmg);"
+              }
+            ]
+          }
+        ],
+        "multipart_hit": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/message/MessagePlayerHitMultipart.java",
+            "declaration_line": 40,
+            "matches": [
+              {
+                "line": 52,
+                "excerpt": "if (dist < 100.0) {"
+              },
+              {
+                "line": 53,
+                "excerpt": "player.attack(mob);"
+              },
+              {
+                "line": 55,
+                "excerpt": "((EntityHydra)mob).triggerHeadFlags(message.extraData);"
+              }
+            ]
+          }
+        ],
+        "hydra_head_index": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/EntityHydra.java",
+            "declaration_line": 380,
+            "matches": [
+              {
+                "line": 381,
+                "excerpt": "if (this.lastHitHead > this.getHeadCount()) {"
+              },
+              {
+                "line": 386,
+                "excerpt": "this.headDamageTracker[headIndex] = this.headDamageTracker[headIndex] + amount;"
+              },
+              {
+                "line": 387,
+                "excerpt": "if (this.headDamageTracker[headIndex] > this.headDamageThreshold && (this.getSeveredHead() == -1 || this.getSeveredHead() >= this.getHeadCount())) {"
+              },
+              {
+                "line": 388,
+                "excerpt": "this.headDamageTracker[headIndex] = 0.0F;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/EntityHydra.java",
+            "declaration_line": 493,
+            "matches": [
+              {
+                "line": 494,
+                "excerpt": "this.lastHitHead = index;"
+              }
+            ]
+          }
+        ],
+        "lectern_buttons": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/inventory/ContainerLectern.java",
+            "declaration_line": 118,
+            "matches": [
+              {
+                "line": 127,
+                "excerpt": "pages[0] = EnumBestiaryPages.values()[Math.min(EnumBestiaryPages.values().length, this.possiblePagesInt[0])];"
+              },
+              {
+                "line": 133,
+                "excerpt": "pages[1] = EnumBestiaryPages.values()[Math.min(EnumBestiaryPages.values().length, this.possiblePagesInt[1])];"
+              },
+              {
+                "line": 139,
+                "excerpt": "pages[2] = EnumBestiaryPages.values()[Math.min(EnumBestiaryPages.values().length, this.possiblePagesInt[2])];"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/inventory/ContainerLectern.java",
+            "declaration_line": 146,
+            "matches": [
+              {
+                "line": 165,
+                "excerpt": "if (this.possiblePagesInt[id] > 0 && !itemstack.isEmpty()) {"
+              }
+            ]
+          }
+        ],
+        "lectern_lifetime": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityLectern.java",
+            "declaration_line": 212,
+            "matches": [
+              {
+                "line": 213,
+                "excerpt": "return true;"
+              }
+            ]
+          }
+        ],
+        "forge_tick": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 68,
+            "matches": [
+              {
+                "line": 79,
+                "excerpt": "BlockDragonforgeCore.setState(entityDragonforge.fireType, entityDragonforge.prevAssembled, level, pos);"
+              },
+              {
+                "line": 89,
+                "excerpt": "entityDragonforge.cookTime--;"
+              },
+              {
+                "line": 99,
+                "excerpt": "entityDragonforge.cookTime++;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 222,
+            "matches": [
+              {
+                "line": 223,
+                "excerpt": "return this.cookTime > 0;"
+              }
+            ]
+          }
+        ],
+        "forge_state": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/block/BlockDragonforgeCore.java",
+            "declaration_line": 46,
+            "matches": [
+              {
+                "line": 48,
+                "excerpt": "keepInventory = true;"
+              },
+              {
+                "line": 71,
+                "excerpt": "keepInventory = false;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/block/BlockDragonforgeCore.java",
+            "declaration_line": 120,
+            "matches": [
+              {
+                "line": 123,
+                "excerpt": "Containers.dropContents(worldIn, pos, (TileEntityDragonforge)tileentity);"
+              },
+              {
+                "line": 125,
+                "excerpt": "worldIn.removeBlockEntity(pos);"
+              }
+            ]
+          }
+        ],
+        "forge_output": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 270,
+            "matches": [
+              {
+                "line": 282,
+                "excerpt": "if (!outputStack.isEmpty() && !outputStack.sameItem(forgeRecipeOutput)) {"
+              },
+              {
+                "line": 286,
+                "excerpt": "int calculatedOutputCount = outputStack.getCount() + forgeRecipeOutput.getCount();"
+              },
+              {
+                "line": 287,
+                "excerpt": "return calculatedOutputCount <= this.getMaxStackSize() && calculatedOutputCount <= outputStack.getMaxStackSize();"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 296,
+            "matches": [
+              {
+                "line": 305,
+                "excerpt": "outputStack.grow(output.getCount());"
+              }
+            ]
+          }
+        ],
+        "forge_persistence": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 206,
+            "matches": [
+              {
+                "line": 210,
+                "excerpt": "this.cookTime = compound.getInt(\"CookTime\");"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 213,
+            "matches": [
+              {
+                "line": 214,
+                "excerpt": "compound.putInt(\"CookTime\", (short)this.cookTime);"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 364,
+            "matches": [
+              {
+                "line": 368,
+                "excerpt": "this.cookTime = Math.min(this.getMaxCookTime() + 1, this.cookTime + i);"
+              },
+              {
+                "line": 378,
+                "excerpt": "this.lastDragonFlameTimer = 40;"
+              }
+            ]
+          }
+        ],
+        "recipe_copies": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/recipe/DragonForgeRecipe.java",
+            "declaration_line": 70,
+            "matches": [
+              {
+                "line": 71,
+                "excerpt": "return this.result;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/recipe/DragonForgeRecipe.java",
+            "declaration_line": 75,
+            "matches": [
+              {
+                "line": 76,
+                "excerpt": "return this.result;"
+              }
+            ]
+          }
+        ],
+        "dragon_target": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/ai/DragonAITarget.java",
+            "declaration_line": 26,
+            "matches": [
+              {
+                "line": 35,
+                "excerpt": "if (this.target != null && !this.target.getClass().equals(this.dragon.getClass())) {"
+              },
+              {
+                "line": 36,
+                "excerpt": "if (!super.canUse()) {"
+              }
+            ]
+          }
+        ],
+        "dragon_mate": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/ai/DragonAIMate.java",
+            "declaration_line": 45,
+            "matches": [
+              {
+                "line": 45,
+                "excerpt": "public boolean continueExecuting() {"
+              },
+              {
+                "line": 46,
+                "excerpt": "return this.targetMate.isAlive() && this.targetMate.isInLove() && this.spawnBabyDelay < 60;"
+              }
+            ]
+          }
+        ],
+        "cyclops_sheep": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/ai/EntitySheepAIFollowCyclops.java",
+            "declaration_line": 49,
+            "matches": [
+              {
+                "line": 50,
+                "excerpt": "if (this.cyclops.isAlive()) {"
+              }
+            ]
+          }
+        ],
+        "ignore_rider": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/ai/EntityAIWatchClosestIgnoreRider.java",
+            "declaration_line": 11,
+            "matches": [
+              {
+                "line": 12,
+                "excerpt": "super(entity, type, dist);"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/ai/EntityAIWatchClosestIgnoreRider.java",
+            "declaration_line": 15,
+            "matches": [
+              {
+                "line": 16,
+                "excerpt": "return super.canUse() && this.lookAt != null && isRidingOrBeingRiddenBy(this.lookAt, this.entity);"
+              }
+            ]
+          }
+        ],
+        "pixie_flee": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/ai/PixieAIFlee.java",
+            "declaration_line": 81,
+            "matches": [
+              {
+                "line": 82,
+                "excerpt": "return this.hidePlace != null && this.pixie.distanceToSqr(this.hidePlace.add(0.5, 0.5, 0.5)) < 2.0;"
+              }
+            ]
+          }
+        ],
+        "scepter": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/item/ItemCockatriceScepter.java",
+            "declaration_line": 50,
+            "matches": [
+              {
+                "line": 51,
+                "excerpt": "if (this.specialWeaponDmg > 0) {"
+              },
+              {
+                "line": 52,
+                "excerpt": "stack.hurtAndBreak(this.specialWeaponDmg, livingEntity, player -> player.broadcastBreakEvent(livingEntity.getUsedItemHand()));"
+              },
+              {
+                "line": 53,
+                "excerpt": "this.specialWeaponDmg = 0;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/item/ItemCockatriceScepter.java",
+            "declaration_line": 60,
+            "matches": [
+              {
+                "line": 61,
+                "excerpt": "return 1;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/item/ItemCockatriceScepter.java",
+            "declaration_line": 133,
+            "matches": [
+              {
+                "line": 142,
+                "excerpt": "this.specialWeaponDmg++;"
+              }
+            ]
+          }
+        ],
+        "scepter_nbt": [],
+        "statue_render": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/client/render/entity/RenderStoneStatue.java",
+            "declaration_line": 68,
+            "matches": [
+              {
+                "line": 71,
+                "excerpt": "EntityModel model = new PigModel(this.context.bakeLayer(ModelLayers.PIG));"
+              },
+              {
+                "line": 87,
+                "excerpt": "if (this.hollowEntityMap.get(entityIn.getTrappedEntityTypeString()) == null) {"
+              },
+              {
+                "line": 91,
+                "excerpt": "build.load(entityIn.getTrappedTag());"
+              },
+              {
+                "line": 96,
+                "excerpt": "fakeEntity = this.hollowEntityMap.putIfAbsent(entityIn.getTrappedEntityTypeString(), build);"
+              },
+              {
+                "line": 99,
+                "excerpt": "fakeEntity = this.hollowEntityMap.get(entityIn.getTrappedEntityTypeString());"
+              }
+            ]
+          }
+        ],
+        "podium_inventory": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityPodium.java",
+            "declaration_line": 96,
+            "matches": [
+              {
+                "line": 102,
+                "excerpt": "this.saveAdditional(this.getUpdateTag());"
+              },
+              {
+                "line": 104,
+                "excerpt": "IceAndFire.sendMSGToAll(new MessageUpdatePodium(this.getBlockPos().asLong(), (ItemStack)this.stacks.get(0)));"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityPodium.java",
+            "declaration_line": 136,
+            "matches": [
+              {
+                "line": 137,
+                "excerpt": "this.stacks.clear();"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityPodium.java",
+            "declaration_line": 170,
+            "matches": [
+              {
+                "line": 171,
+                "excerpt": "return ItemStack.EMPTY;"
+              }
+            ]
+          }
+        ],
+        "summoning": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/item/ItemSummoningCrystal.java",
+            "declaration_line": 89,
+            "matches": [
+              {
+                "line": 103,
+                "excerpt": "if (id != null && !context.getLevel().isClientSide) {"
+              },
+              {
+                "line": 123,
+                "excerpt": "boolean flag2 = false;"
+              },
+              {
+                "line": 124,
+                "excerpt": "if (!flag && data != null && context.getLevel().isClientSide) {"
+              },
+              {
+                "line": 127,
+                "excerpt": "serverWorld.setChunkForced(pos.x, pos.z, true);"
+              },
+              {
+                "line": 156,
+                "excerpt": "stack.setTag(new CompoundTag());"
+              }
+            ]
+          }
+        ],
+        "worm_path": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/pathfinding/NodeProcessorDeathWorm.java",
+            "declaration_line": 75,
+            "matches": [
+              {
+                "line": 83,
+                "excerpt": "return BlockPathTypes.BREACH;"
+              },
+              {
+                "line": 89,
+                "excerpt": "BlockState blockstate1 = this.level.getBlockState(blockpos$mutable);"
+              },
+              {
+                "line": 90,
+                "excerpt": "return this.isPassable(blockstate1) ? BlockPathTypes.WATER : BlockPathTypes.BLOCKED;"
+              }
+            ]
+          }
+        ],
+        "bird_flock": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/util/StymphalianBirdFlock.java",
+            "declaration_line": 64,
+            "matches": [
+              {
+                "line": 65,
+                "excerpt": "if (!this.members.isEmpty() && (this.leader == null || !this.leader.isAlive())) {"
+              },
+              {
+                "line": 66,
+                "excerpt": "this.leader = this.members.get(this.random.nextInt(this.members.size()));"
+              }
+            ]
+          }
+        ],
+        "multipart_collision": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/EntityMutlipartPart.java",
+            "declaration_line": 120,
+            "matches": [
+              {
+                "line": 146,
+                "excerpt": "this.collideWithNearbyEntities();"
+              },
+              {
+                "line": 158,
+                "excerpt": "this.collideWithNearbyEntities();"
+              }
+            ]
+          }
+        ],
+        "dragon_prey_side": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/EntityDragonBase.java",
+            "declaration_line": 1773,
+            "matches": [
+              {
+                "line": 1778,
+                "excerpt": "if (this.getAnimation() == ANIMATION_SHAKEPREY && this.getAnimationTick() > 55 && prey != null) {"
+              },
+              {
+                "line": 1779,
+                "excerpt": "prey.hurt(DamageSource.mobAttack(this), prey instanceof Player ? 17.0F : (float)this.getAttribute(Attributes.ATTACK_DAMAGE).getValue() * 4.0F);"
+              },
+              {
+                "line": 1780,
+                "excerpt": "prey.stopRiding();"
+              }
+            ]
+          }
+        ],
+        "frozen_egg": [
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityEggInIce.java",
+            "declaration_line": 70,
+            "matches": [
+              {
+                "line": 72,
+                "excerpt": "this.type = EnumDragonEgg.values()[tag.getByte(\"Color\")];"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.18.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityEggInIce.java",
+            "declaration_line": 95,
+            "matches": [
+              {
+                "line": 95,
+                "excerpt": "public CompoundTag getUpdateTag() {"
+              }
+            ]
+          }
+        ]
+      },
+      "global_modulo_goals": [
+        "AmphithereAIFleePlayer",
+        "AmphithereAITargetItems",
+        "CockatriceAITargetItems",
+        "DragonAITargetItems",
+        "DreadAIRideHorse",
+        "HippogryphAITargetItems",
+        "MyrmexAIFindMate",
+        "MyrmexAIForageForItems",
+        "MyrmexAIPickupBabies",
+        "PixieAIFlee",
+        "PixieAIPickupItem"
+      ],
+      "bestiary_readLines_count": 2,
+      "mapped_sha256": "e75eca7553a68d0873bafb3d4797d1a70321b521802633c6a33caf1c143f0c8f"
+    },
+    "1.19.2": {
+      "minecraft": "1.19.2",
+      "curse_file_id": "5037952",
+      "original_jar": "C:\\Users\\tanks\\.gradle\\caches\\modules-2\\files-2.1\\curse.maven\\ice-and-fire-dragons-264231\\5037952\\4d90ef51a9d265753d55bac02d55f7f01b25b8d\\ice-and-fire-dragons-264231-5037952.jar",
+      "mapped_jar": "C:\\Users\\tanks\\.gradle\\caches\\forge_gradle\\deobf_dependencies\\curse\\maven\\ice-and-fire-dragons-264231\\5037952_mapped_official_1.19.2\\ice-and-fire-dragons-264231-5037952_mapped_official_1.19.2.jar",
+      "original_sha256": "ef3a2fbe2f37ce3629268f80b28f802857e737ebbb29dc2f4eb0cd3a584d299d",
+      "implementation_version": "1.19.2-2.1.13+build.beta-3",
+      "selected_class_count": 216,
+      "evidence": {
+        "ride_control": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/message/MessageDragonControl.java",
+            "declaration_line": 61,
+            "matches": [
+              {
+                "line": 70,
+                "excerpt": "if (ServerEvents.isRidingOrBeingRiddenBy(entity, player)) {"
+              },
+              {
+                "line": 73,
+                "excerpt": "dragon.setControlState(message.controlState);"
+              },
+              {
+                "line": 77,
+                "excerpt": "hippo.setControlState(message.controlState);"
+              },
+              {
+                "line": 81,
+                "excerpt": "hippo.setControlState(message.controlState);"
+              },
+              {
+                "line": 84,
+                "excerpt": "deathworm.setControlState(message.controlState);"
+              },
+              {
+                "line": 85,
+                "excerpt": "deathworm.setPos(message.getPosX(), message.getPosY(), message.getPosZ());"
+              },
+              {
+                "line": 87,
+                "excerpt": "amphi.setControlState(message.controlState);"
+              }
+            ]
+          }
+        ],
+        "multipart_damage": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/message/MessageMultipartInteract.java",
+            "declaration_line": 36,
+            "matches": [
+              {
+                "line": 48,
+                "excerpt": "if (dist < 100.0) {"
+              },
+              {
+                "line": 49,
+                "excerpt": "if (message.dmg > 0.0F) {"
+              },
+              {
+                "line": 50,
+                "excerpt": "mob.hurt(DamageSource.mobAttack(player), message.dmg);"
+              }
+            ]
+          }
+        ],
+        "multipart_hit": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/message/MessagePlayerHitMultipart.java",
+            "declaration_line": 40,
+            "matches": [
+              {
+                "line": 52,
+                "excerpt": "if (dist < 100.0) {"
+              },
+              {
+                "line": 53,
+                "excerpt": "player.attack(mob);"
+              },
+              {
+                "line": 55,
+                "excerpt": "((EntityHydra)mob).triggerHeadFlags(message.extraData);"
+              }
+            ]
+          }
+        ],
+        "hydra_head_index": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/EntityHydra.java",
+            "declaration_line": 381,
+            "matches": [
+              {
+                "line": 382,
+                "excerpt": "if (this.lastHitHead > this.getHeadCount()) {"
+              },
+              {
+                "line": 387,
+                "excerpt": "this.headDamageTracker[headIndex] = this.headDamageTracker[headIndex] + amount;"
+              },
+              {
+                "line": 388,
+                "excerpt": "if (this.headDamageTracker[headIndex] > this.headDamageThreshold && (this.getSeveredHead() == -1 || this.getSeveredHead() >= this.getHeadCount())) {"
+              },
+              {
+                "line": 389,
+                "excerpt": "this.headDamageTracker[headIndex] = 0.0F;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/EntityHydra.java",
+            "declaration_line": 494,
+            "matches": [
+              {
+                "line": 495,
+                "excerpt": "this.lastHitHead = index;"
+              }
+            ]
+          }
+        ],
+        "lectern_buttons": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/inventory/ContainerLectern.java",
+            "declaration_line": 118,
+            "matches": [
+              {
+                "line": 127,
+                "excerpt": "pages[0] = EnumBestiaryPages.values()[Math.min(EnumBestiaryPages.values().length, this.possiblePagesInt[0])];"
+              },
+              {
+                "line": 133,
+                "excerpt": "pages[1] = EnumBestiaryPages.values()[Math.min(EnumBestiaryPages.values().length, this.possiblePagesInt[1])];"
+              },
+              {
+                "line": 139,
+                "excerpt": "pages[2] = EnumBestiaryPages.values()[Math.min(EnumBestiaryPages.values().length, this.possiblePagesInt[2])];"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/inventory/ContainerLectern.java",
+            "declaration_line": 146,
+            "matches": [
+              {
+                "line": 166,
+                "excerpt": "if (this.possiblePagesInt[id] > 0 && !bookStack.isEmpty()) {"
+              }
+            ]
+          }
+        ],
+        "lectern_lifetime": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityLectern.java",
+            "declaration_line": 207,
+            "matches": [
+              {
+                "line": 208,
+                "excerpt": "return true;"
+              }
+            ]
+          }
+        ],
+        "forge_tick": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 67,
+            "matches": [
+              {
+                "line": 78,
+                "excerpt": "BlockDragonforgeCore.setState(entityDragonforge.fireType, entityDragonforge.prevAssembled, level, pos);"
+              },
+              {
+                "line": 88,
+                "excerpt": "entityDragonforge.cookTime--;"
+              },
+              {
+                "line": 98,
+                "excerpt": "entityDragonforge.cookTime++;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 214,
+            "matches": [
+              {
+                "line": 215,
+                "excerpt": "return this.cookTime > 0;"
+              }
+            ]
+          }
+        ],
+        "forge_state": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/block/BlockDragonforgeCore.java",
+            "declaration_line": 46,
+            "matches": [
+              {
+                "line": 48,
+                "excerpt": "keepInventory = true;"
+              },
+              {
+                "line": 71,
+                "excerpt": "keepInventory = false;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/block/BlockDragonforgeCore.java",
+            "declaration_line": 120,
+            "matches": [
+              {
+                "line": 123,
+                "excerpt": "Containers.dropContents(worldIn, pos, (TileEntityDragonforge)tileentity);"
+              },
+              {
+                "line": 125,
+                "excerpt": "worldIn.removeBlockEntity(pos);"
+              }
+            ]
+          }
+        ],
+        "forge_output": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 258,
+            "matches": [
+              {
+                "line": 274,
+                "excerpt": "int calculatedOutputCount = outputStack.getCount() + forgeRecipeOutput.getCount();"
+              },
+              {
+                "line": 275,
+                "excerpt": "return calculatedOutputCount <= this.getMaxStackSize() && calculatedOutputCount <= outputStack.getMaxStackSize();"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 284,
+            "matches": [
+              {
+                "line": 293,
+                "excerpt": "outputStack.grow(output.getCount());"
+              }
+            ]
+          }
+        ],
+        "forge_persistence": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 198,
+            "matches": [
+              {
+                "line": 202,
+                "excerpt": "this.cookTime = compound.getInt(\"CookTime\");"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 205,
+            "matches": [
+              {
+                "line": 206,
+                "excerpt": "compound.putInt(\"CookTime\", (short)this.cookTime);"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 349,
+            "matches": [
+              {
+                "line": 353,
+                "excerpt": "this.cookTime = Math.min(this.getMaxCookTime() + 1, this.cookTime + i);"
+              },
+              {
+                "line": 363,
+                "excerpt": "this.lastDragonFlameTimer = 40;"
+              }
+            ]
+          }
+        ],
+        "recipe_copies": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/recipe/DragonForgeRecipe.java",
+            "declaration_line": 70,
+            "matches": [
+              {
+                "line": 71,
+                "excerpt": "return this.result;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/recipe/DragonForgeRecipe.java",
+            "declaration_line": 75,
+            "matches": [
+              {
+                "line": 76,
+                "excerpt": "return this.result;"
+              }
+            ]
+          }
+        ],
+        "dragon_target": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/ai/DragonAITarget.java",
+            "declaration_line": 26,
+            "matches": [
+              {
+                "line": 35,
+                "excerpt": "if (this.target != null && !this.target.getClass().equals(this.dragon.getClass())) {"
+              },
+              {
+                "line": 36,
+                "excerpt": "if (!super.canUse()) {"
+              }
+            ]
+          }
+        ],
+        "dragon_mate": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/ai/DragonAIMate.java",
+            "declaration_line": 45,
+            "matches": [
+              {
+                "line": 45,
+                "excerpt": "public boolean continueExecuting() {"
+              },
+              {
+                "line": 46,
+                "excerpt": "return this.targetMate.isAlive() && this.targetMate.isInLove() && this.spawnBabyDelay < 60;"
+              }
+            ]
+          }
+        ],
+        "cyclops_sheep": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/ai/EntitySheepAIFollowCyclops.java",
+            "declaration_line": 50,
+            "matches": [
+              {
+                "line": 51,
+                "excerpt": "if (this.cyclops.isAlive()) {"
+              }
+            ]
+          }
+        ],
+        "ignore_rider": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/ai/EntityAIWatchClosestIgnoreRider.java",
+            "declaration_line": 11,
+            "matches": [
+              {
+                "line": 12,
+                "excerpt": "super(entity, type, dist);"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/ai/EntityAIWatchClosestIgnoreRider.java",
+            "declaration_line": 15,
+            "matches": [
+              {
+                "line": 16,
+                "excerpt": "return super.canUse() && this.lookAt != null && isRidingOrBeingRiddenBy(this.lookAt, this.entity);"
+              }
+            ]
+          }
+        ],
+        "pixie_flee": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/ai/PixieAIFlee.java",
+            "declaration_line": 81,
+            "matches": [
+              {
+                "line": 82,
+                "excerpt": "return this.hidePlace != null && this.pixie.distanceToSqr(this.hidePlace.add(0.5, 0.5, 0.5)) < 2.0;"
+              }
+            ]
+          }
+        ],
+        "scepter": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/item/ItemCockatriceScepter.java",
+            "declaration_line": 49,
+            "matches": [
+              {
+                "line": 50,
+                "excerpt": "if (this.specialWeaponDmg > 0) {"
+              },
+              {
+                "line": 51,
+                "excerpt": "stack.hurtAndBreak(this.specialWeaponDmg, livingEntity, player -> player.broadcastBreakEvent(livingEntity.getUsedItemHand()));"
+              },
+              {
+                "line": 52,
+                "excerpt": "this.specialWeaponDmg = 0;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/item/ItemCockatriceScepter.java",
+            "declaration_line": 59,
+            "matches": [
+              {
+                "line": 60,
+                "excerpt": "return 1;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/item/ItemCockatriceScepter.java",
+            "declaration_line": 131,
+            "matches": [
+              {
+                "line": 140,
+                "excerpt": "this.specialWeaponDmg++;"
+              }
+            ]
+          }
+        ],
+        "scepter_nbt": [],
+        "statue_render": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/client/render/entity/RenderStoneStatue.java",
+            "declaration_line": 67,
+            "matches": [
+              {
+                "line": 70,
+                "excerpt": "EntityModel model = new PigModel(this.context.bakeLayer(ModelLayers.PIG));"
+              },
+              {
+                "line": 86,
+                "excerpt": "if (this.hollowEntityMap.get(entityIn.getTrappedEntityTypeString()) == null) {"
+              },
+              {
+                "line": 90,
+                "excerpt": "build.load(entityIn.getTrappedTag());"
+              },
+              {
+                "line": 95,
+                "excerpt": "fakeEntity = this.hollowEntityMap.putIfAbsent(entityIn.getTrappedEntityTypeString(), build);"
+              },
+              {
+                "line": 98,
+                "excerpt": "fakeEntity = this.hollowEntityMap.get(entityIn.getTrappedEntityTypeString());"
+              }
+            ]
+          }
+        ],
+        "podium_inventory": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityPodium.java",
+            "declaration_line": 95,
+            "matches": [
+              {
+                "line": 101,
+                "excerpt": "this.saveAdditional(this.getUpdateTag());"
+              },
+              {
+                "line": 103,
+                "excerpt": "IceAndFire.sendMSGToAll(new MessageUpdatePodium(this.getBlockPos().asLong(), (ItemStack)this.stacks.get(0)));"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityPodium.java",
+            "declaration_line": 135,
+            "matches": [
+              {
+                "line": 136,
+                "excerpt": "this.stacks.clear();"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityPodium.java",
+            "declaration_line": 169,
+            "matches": [
+              {
+                "line": 170,
+                "excerpt": "return ItemStack.EMPTY;"
+              }
+            ]
+          }
+        ],
+        "summoning": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/item/ItemSummoningCrystal.java",
+            "declaration_line": 88,
+            "matches": [
+              {
+                "line": 102,
+                "excerpt": "if (id != null && !context.getLevel().isClientSide) {"
+              },
+              {
+                "line": 122,
+                "excerpt": "boolean flag2 = false;"
+              },
+              {
+                "line": 123,
+                "excerpt": "if (!flag && data != null && context.getLevel().isClientSide) {"
+              },
+              {
+                "line": 126,
+                "excerpt": "serverWorld.setChunkForced(pos.x, pos.z, true);"
+              },
+              {
+                "line": 155,
+                "excerpt": "stack.setTag(new CompoundTag());"
+              }
+            ]
+          }
+        ],
+        "worm_path": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/pathfinding/NodeProcessorDeathWorm.java",
+            "declaration_line": 75,
+            "matches": [
+              {
+                "line": 83,
+                "excerpt": "return BlockPathTypes.BREACH;"
+              },
+              {
+                "line": 89,
+                "excerpt": "BlockState blockstate1 = this.level.getBlockState(blockpos$mutable);"
+              },
+              {
+                "line": 90,
+                "excerpt": "return this.isPassable(blockstate1) ? BlockPathTypes.WATER : BlockPathTypes.BLOCKED;"
+              }
+            ]
+          }
+        ],
+        "bird_flock": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/util/StymphalianBirdFlock.java",
+            "declaration_line": 64,
+            "matches": [
+              {
+                "line": 65,
+                "excerpt": "if (!this.members.isEmpty() && (this.leader == null || !this.leader.isAlive())) {"
+              },
+              {
+                "line": 66,
+                "excerpt": "this.leader = this.members.get(this.random.nextInt(this.members.size()));"
+              }
+            ]
+          }
+        ],
+        "multipart_collision": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/EntityMutlipartPart.java",
+            "declaration_line": 120,
+            "matches": [
+              {
+                "line": 146,
+                "excerpt": "this.collideWithNearbyEntities();"
+              },
+              {
+                "line": 158,
+                "excerpt": "this.collideWithNearbyEntities();"
+              }
+            ]
+          }
+        ],
+        "dragon_prey_side": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/EntityDragonBase.java",
+            "declaration_line": 1770,
+            "matches": [
+              {
+                "line": 1775,
+                "excerpt": "if (this.getAnimation() == ANIMATION_SHAKEPREY && this.getAnimationTick() > 55 && prey != null) {"
+              },
+              {
+                "line": 1778,
+                "excerpt": "boolean didDamage = prey.hurt(DamageSource.mobAttack(this), damage);"
+              },
+              {
+                "line": 1787,
+                "excerpt": "prey.stopRiding();"
+              }
+            ]
+          }
+        ],
+        "frozen_egg": [
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityEggInIce.java",
+            "declaration_line": 70,
+            "matches": [
+              {
+                "line": 72,
+                "excerpt": "this.type = EnumDragonEgg.values()[tag.getByte(\"Color\")];"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.19.2/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityEggInIce.java",
+            "declaration_line": 95,
+            "matches": [
+              {
+                "line": 95,
+                "excerpt": "public CompoundTag getUpdateTag() {"
+              }
+            ]
+          }
+        ]
+      },
+      "global_modulo_goals": [
+        "AmphithereAIFleePlayer",
+        "AmphithereAITargetItems",
+        "CockatriceAITargetItems",
+        "DragonAITargetItems",
+        "DreadAIRideHorse",
+        "HippogryphAITargetItems",
+        "MyrmexAIFindMate",
+        "MyrmexAIForageForItems",
+        "MyrmexAIPickupBabies",
+        "PixieAIFlee",
+        "PixieAIPickupItem"
+      ],
+      "bestiary_readLines_count": 2,
+      "mapped_sha256": "3cfd089743163cc4168a423a69d8960240aeb9557181c3bac29f6745203685ba"
+    },
+    "1.20.1": {
+      "minecraft": "1.20.1",
+      "curse_file_id": "5633453",
+      "original_jar": "C:\\Users\\tanks\\.gradle\\caches\\modules-2\\files-2.1\\curse.maven\\ice-and-fire-dragons-264231\\5633453\\7e828cbb046ca3d622e92c68f956bd1c0155dc6f\\ice-and-fire-dragons-264231-5633453.jar",
+      "mapped_jar": "C:\\Users\\tanks\\.gradle\\caches\\forge_gradle\\deobf_dependencies\\curse\\maven\\ice-and-fire-dragons-264231\\5633453_mapped_official_1.20.1\\ice-and-fire-dragons-264231-5633453_mapped_official_1.20.1.jar",
+      "original_sha256": "2b80245fc9b7d6fdc61d71f9892f4c6114eb7f303f65634845aaab25f84d1e82",
+      "implementation_version": "2.1.13-1.20.1",
+      "selected_class_count": 214,
+      "evidence": {
+        "ride_control": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/message/MessageDragonControl.java",
+            "declaration_line": 61,
+            "matches": [
+              {
+                "line": 63,
+                "excerpt": "context.enqueueWork(() -> {"
+              },
+              {
+                "line": 71,
+                "excerpt": "if (ServerEvents.isRidingOrBeingRiddenBy(entity, player)) {"
+              },
+              {
+                "line": 74,
+                "excerpt": "dragon.setControlState(message.controlState);"
+              },
+              {
+                "line": 78,
+                "excerpt": "hippogryph.setControlState(message.controlState);"
+              },
+              {
+                "line": 82,
+                "excerpt": "hippo.setControlState(message.controlState);"
+              },
+              {
+                "line": 85,
+                "excerpt": "hippo.setPos(message.getPosX(), message.getPosY(), message.getPosZ());"
+              },
+              {
+                "line": 87,
+                "excerpt": "deathWorm.setControlState(message.controlState);"
+              },
+              {
+                "line": 88,
+                "excerpt": "deathWorm.setPos(message.getPosX(), message.getPosY(), message.getPosZ());"
+              },
+              {
+                "line": 91,
+                "excerpt": "amphithere.setControlState(message.controlState);"
+              },
+              {
+                "line": 94,
+                "excerpt": "amphithere.setPos(message.getPosX(), message.getPosY(), message.getPosZ());"
+              }
+            ]
+          }
+        ],
+        "multipart_damage": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/message/MessageMultipartInteract.java",
+            "declaration_line": 34,
+            "matches": [
+              {
+                "line": 36,
+                "excerpt": "context.enqueueWork(() -> {"
+              },
+              {
+                "line": 44,
+                "excerpt": "if (dist < 100.0) {"
+              },
+              {
+                "line": 45,
+                "excerpt": "if (message.dmg > 0.0F) {"
+              },
+              {
+                "line": 46,
+                "excerpt": "livingEntity.hurt(player.level().damageSources().mobAttack(player), message.dmg);"
+              }
+            ]
+          }
+        ],
+        "multipart_hit": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/message/MessagePlayerHitMultipart.java",
+            "declaration_line": 39,
+            "matches": [
+              {
+                "line": 41,
+                "excerpt": "context.enqueueWork(() -> {"
+              },
+              {
+                "line": 49,
+                "excerpt": "if (dist < 100.0) {"
+              },
+              {
+                "line": 50,
+                "excerpt": "player.attack(livingEntity);"
+              },
+              {
+                "line": 52,
+                "excerpt": "hydra.triggerHeadFlags(message.extraData);"
+              }
+            ]
+          }
+        ],
+        "hydra_head_index": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/EntityHydra.java",
+            "declaration_line": 372,
+            "matches": [
+              {
+                "line": 373,
+                "excerpt": "if (this.lastHitHead > this.getHeadCount()) {"
+              },
+              {
+                "line": 378,
+                "excerpt": "this.headDamageTracker[headIndex] = this.headDamageTracker[headIndex] + amount;"
+              },
+              {
+                "line": 379,
+                "excerpt": "if (this.headDamageTracker[headIndex] > this.headDamageThreshold && (this.getSeveredHead() == -1 || this.getSeveredHead() >= this.getHeadCount())) {"
+              },
+              {
+                "line": 380,
+                "excerpt": "this.headDamageTracker[headIndex] = 0.0F;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/EntityHydra.java",
+            "declaration_line": 485,
+            "matches": [
+              {
+                "line": 486,
+                "excerpt": "this.lastHitHead = index;"
+              }
+            ]
+          }
+        ],
+        "lectern_buttons": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/inventory/ContainerLectern.java",
+            "declaration_line": 118,
+            "matches": [
+              {
+                "line": 127,
+                "excerpt": "pages[0] = EnumBestiaryPages.values()[Math.min(EnumBestiaryPages.values().length, this.possiblePagesInt[0])];"
+              },
+              {
+                "line": 133,
+                "excerpt": "pages[1] = EnumBestiaryPages.values()[Math.min(EnumBestiaryPages.values().length, this.possiblePagesInt[1])];"
+              },
+              {
+                "line": 139,
+                "excerpt": "pages[2] = EnumBestiaryPages.values()[Math.min(EnumBestiaryPages.values().length, this.possiblePagesInt[2])];"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/inventory/ContainerLectern.java",
+            "declaration_line": 146,
+            "matches": [
+              {
+                "line": 166,
+                "excerpt": "if (this.possiblePagesInt[id] > 0 && !bookStack.isEmpty()) {"
+              }
+            ]
+          }
+        ],
+        "lectern_lifetime": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityLectern.java",
+            "declaration_line": 207,
+            "matches": [
+              {
+                "line": 208,
+                "excerpt": "return true;"
+              }
+            ]
+          }
+        ],
+        "forge_tick": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 67,
+            "matches": [
+              {
+                "line": 78,
+                "excerpt": "BlockDragonforgeCore.setState(entityDragonforge.fireType, entityDragonforge.prevAssembled, level, pos);"
+              },
+              {
+                "line": 88,
+                "excerpt": "entityDragonforge.cookTime--;"
+              },
+              {
+                "line": 98,
+                "excerpt": "entityDragonforge.cookTime++;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 214,
+            "matches": [
+              {
+                "line": 215,
+                "excerpt": "return this.cookTime > 0;"
+              }
+            ]
+          }
+        ],
+        "forge_state": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/block/BlockDragonforgeCore.java",
+            "declaration_line": 46,
+            "matches": [
+              {
+                "line": 48,
+                "excerpt": "keepInventory = true;"
+              },
+              {
+                "line": 71,
+                "excerpt": "keepInventory = false;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/block/BlockDragonforgeCore.java",
+            "declaration_line": 120,
+            "matches": [
+              {
+                "line": 123,
+                "excerpt": "Containers.dropContents(worldIn, pos, (TileEntityDragonforge)tileentity);"
+              },
+              {
+                "line": 125,
+                "excerpt": "worldIn.removeBlockEntity(pos);"
+              }
+            ]
+          }
+        ],
+        "forge_output": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 258,
+            "matches": [
+              {
+                "line": 270,
+                "excerpt": "if (!outputStack.isEmpty() && !ItemStack.isSameItem(outputStack, forgeRecipeOutput)) {"
+              },
+              {
+                "line": 274,
+                "excerpt": "int calculatedOutputCount = outputStack.getCount() + forgeRecipeOutput.getCount();"
+              },
+              {
+                "line": 275,
+                "excerpt": "return calculatedOutputCount <= this.getMaxStackSize() && calculatedOutputCount <= outputStack.getMaxStackSize();"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 284,
+            "matches": [
+              {
+                "line": 293,
+                "excerpt": "outputStack.grow(output.getCount());"
+              }
+            ]
+          }
+        ],
+        "forge_persistence": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 198,
+            "matches": [
+              {
+                "line": 202,
+                "excerpt": "this.cookTime = compound.getInt(\"CookTime\");"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 205,
+            "matches": [
+              {
+                "line": 206,
+                "excerpt": "compound.putInt(\"CookTime\", (short)this.cookTime);"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityDragonforge.java",
+            "declaration_line": 349,
+            "matches": [
+              {
+                "line": 353,
+                "excerpt": "this.cookTime = Math.min(this.getMaxCookTime() + 1, this.cookTime + i);"
+              },
+              {
+                "line": 363,
+                "excerpt": "this.lastDragonFlameTimer = 40;"
+              }
+            ]
+          }
+        ],
+        "recipe_copies": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/recipe/DragonForgeRecipe.java",
+            "declaration_line": 71,
+            "matches": [
+              {
+                "line": 72,
+                "excerpt": "return this.result;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/recipe/DragonForgeRecipe.java",
+            "declaration_line": 76,
+            "matches": [
+              {
+                "line": 77,
+                "excerpt": "return this.result;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/recipe/DragonForgeRecipe.java",
+            "declaration_line": 81,
+            "matches": [
+              {
+                "line": 82,
+                "excerpt": "return this.result;"
+              }
+            ]
+          }
+        ],
+        "dragon_target": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/ai/DragonAITarget.java",
+            "declaration_line": 26,
+            "matches": [
+              {
+                "line": 35,
+                "excerpt": "if (this.target != null && !this.target.getClass().equals(this.dragon.getClass())) {"
+              },
+              {
+                "line": 36,
+                "excerpt": "if (!super.canUse()) {"
+              }
+            ]
+          }
+        ],
+        "dragon_mate": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/ai/DragonAIMate.java",
+            "declaration_line": 45,
+            "matches": [
+              {
+                "line": 45,
+                "excerpt": "public boolean continueExecuting() {"
+              },
+              {
+                "line": 46,
+                "excerpt": "return this.targetMate.isAlive() && this.targetMate.isInLove() && this.spawnBabyDelay < 60;"
+              }
+            ]
+          }
+        ],
+        "cyclops_sheep": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/ai/EntitySheepAIFollowCyclops.java",
+            "declaration_line": 49,
+            "matches": [
+              {
+                "line": 50,
+                "excerpt": "if (this.cyclops.isAlive()) {"
+              }
+            ]
+          }
+        ],
+        "ignore_rider": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/ai/EntityAIWatchClosestIgnoreRider.java",
+            "declaration_line": 11,
+            "matches": [
+              {
+                "line": 12,
+                "excerpt": "super(entity, type, dist);"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/ai/EntityAIWatchClosestIgnoreRider.java",
+            "declaration_line": 15,
+            "matches": [
+              {
+                "line": 16,
+                "excerpt": "return super.canUse() && this.lookAt != null && isRidingOrBeingRiddenBy(this.lookAt, this.entity);"
+              }
+            ]
+          }
+        ],
+        "pixie_flee": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/ai/PixieAIFlee.java",
+            "declaration_line": 81,
+            "matches": [
+              {
+                "line": 82,
+                "excerpt": "return this.hidePlace != null && this.pixie.distanceToSqr(this.hidePlace.add(0.5, 0.5, 0.5)) < 2.0;"
+              }
+            ]
+          }
+        ],
+        "scepter": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/item/ItemCockatriceScepter.java",
+            "declaration_line": 48,
+            "matches": [
+              {
+                "line": 49,
+                "excerpt": "if (this.specialWeaponDmg > 0) {"
+              },
+              {
+                "line": 50,
+                "excerpt": "stack.hurtAndBreak(this.specialWeaponDmg, livingEntity, player -> player.broadcastBreakEvent(livingEntity.getUsedItemHand()));"
+              },
+              {
+                "line": 51,
+                "excerpt": "this.specialWeaponDmg = 0;"
+              },
+              {
+                "line": 54,
+                "excerpt": "EntityDataProvider.getCapability(livingEntity).ifPresent(data -> data.miscData.getTargetedByScepter().clear());"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/item/ItemCockatriceScepter.java",
+            "declaration_line": 57,
+            "matches": [
+              {
+                "line": 58,
+                "excerpt": "return 1;"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/item/ItemCockatriceScepter.java",
+            "declaration_line": 129,
+            "matches": [
+              {
+                "line": 135,
+                "excerpt": "this.specialWeaponDmg++;"
+              }
+            ]
+          }
+        ],
+        "scepter_nbt": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/props/MiscData.java",
+            "declaration_line": 85,
+            "matches": [
+              {
+                "line": 97,
+                "excerpt": "tag.putIntArray(\"targetedByScepterIds\", ids);"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/props/MiscData.java",
+            "declaration_line": 103,
+            "matches": [
+              {
+                "line": 108,
+                "excerpt": "int[] loadedChainedToIds = miscData.getIntArray(\"targetedByScepterIds\");"
+              }
+            ]
+          }
+        ],
+        "statue_render": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/client/render/entity/RenderStoneStatue.java",
+            "declaration_line": 67,
+            "matches": [
+              {
+                "line": 70,
+                "excerpt": "EntityModel model = new PigModel(this.context.bakeLayer(ModelLayers.PIG));"
+              },
+              {
+                "line": 86,
+                "excerpt": "if (this.hollowEntityMap.get(entityIn.getTrappedEntityTypeString()) == null) {"
+              },
+              {
+                "line": 90,
+                "excerpt": "build.load(entityIn.getTrappedTag());"
+              },
+              {
+                "line": 95,
+                "excerpt": "fakeEntity = this.hollowEntityMap.putIfAbsent(entityIn.getTrappedEntityTypeString(), build);"
+              },
+              {
+                "line": 98,
+                "excerpt": "fakeEntity = this.hollowEntityMap.get(entityIn.getTrappedEntityTypeString());"
+              }
+            ]
+          }
+        ],
+        "podium_inventory": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityPodium.java",
+            "declaration_line": 95,
+            "matches": [
+              {
+                "line": 101,
+                "excerpt": "this.saveAdditional(this.getUpdateTag());"
+              },
+              {
+                "line": 103,
+                "excerpt": "IceAndFire.sendMSGToAll(new MessageUpdatePodium(this.getBlockPos().asLong(), (ItemStack)this.stacks.get(0)));"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityPodium.java",
+            "declaration_line": 135,
+            "matches": [
+              {
+                "line": 136,
+                "excerpt": "this.stacks.clear();"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityPodium.java",
+            "declaration_line": 169,
+            "matches": [
+              {
+                "line": 170,
+                "excerpt": "return ItemStack.EMPTY;"
+              }
+            ]
+          }
+        ],
+        "summoning": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/item/ItemSummoningCrystal.java",
+            "declaration_line": 88,
+            "matches": [
+              {
+                "line": 102,
+                "excerpt": "if (id != null && !context.getLevel().isClientSide) {"
+              },
+              {
+                "line": 122,
+                "excerpt": "boolean flag2 = false;"
+              },
+              {
+                "line": 123,
+                "excerpt": "if (!flag && data != null && context.getLevel().isClientSide) {"
+              },
+              {
+                "line": 126,
+                "excerpt": "serverWorld.setChunkForced(pos.x, pos.z, true);"
+              },
+              {
+                "line": 155,
+                "excerpt": "stack.setTag(new CompoundTag());"
+              }
+            ]
+          }
+        ],
+        "worm_path": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/pathfinding/NodeProcessorDeathWorm.java",
+            "declaration_line": 64,
+            "matches": [
+              {
+                "line": 72,
+                "excerpt": "return BlockPathTypes.BREACH;"
+              },
+              {
+                "line": 78,
+                "excerpt": "BlockState blockstate1 = this.level.getBlockState(blockpos$mutable);"
+              },
+              {
+                "line": 79,
+                "excerpt": "return this.isPassable(blockstate1) ? BlockPathTypes.WATER : BlockPathTypes.BLOCKED;"
+              }
+            ]
+          }
+        ],
+        "bird_flock": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/util/StymphalianBirdFlock.java",
+            "declaration_line": 64,
+            "matches": [
+              {
+                "line": 65,
+                "excerpt": "if (!this.members.isEmpty() && (this.leader == null || !this.leader.isAlive())) {"
+              },
+              {
+                "line": 66,
+                "excerpt": "this.leader = this.members.get(this.random.nextInt(this.members.size()));"
+              }
+            ]
+          }
+        ],
+        "multipart_collision": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/EntityMutlipartPart.java",
+            "declaration_line": 123,
+            "matches": [
+              {
+                "line": 149,
+                "excerpt": "this.collideWithNearbyEntities();"
+              },
+              {
+                "line": 161,
+                "excerpt": "this.collideWithNearbyEntities();"
+              }
+            ]
+          }
+        ],
+        "dragon_prey_side": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/EntityDragonBase.java",
+            "declaration_line": 1713,
+            "matches": [
+              {
+                "line": 1718,
+                "excerpt": "if (this.getAnimation() == ANIMATION_SHAKEPREY && this.getAnimationTick() > 55 && prey != null) {"
+              },
+              {
+                "line": 1721,
+                "excerpt": "boolean didDamage = prey.hurt(this.level().damageSources().mobAttack(this), damage);"
+              },
+              {
+                "line": 1730,
+                "excerpt": "prey.stopRiding();"
+              }
+            ]
+          }
+        ],
+        "frozen_egg": [
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityEggInIce.java",
+            "declaration_line": 70,
+            "matches": [
+              {
+                "line": 72,
+                "excerpt": "this.type = EnumDragonEgg.values()[tag.getByte(\"Color\")];"
+              }
+            ]
+          },
+          {
+            "decompiled_path": "1.20.1/sources/com/github/alexthe666/iceandfire/entity/tile/TileEntityEggInIce.java",
+            "declaration_line": 95,
+            "matches": [
+              {
+                "line": 95,
+                "excerpt": "public CompoundTag getUpdateTag() {"
+              }
+            ]
+          }
+        ]
+      },
+      "global_modulo_goals": [
+        "AmphithereAIFleePlayer",
+        "AmphithereAITargetItems",
+        "CockatriceAITargetItems",
+        "DragonAITargetItems",
+        "DreadAIRideHorse",
+        "MyrmexAIFindMate",
+        "MyrmexAIForageForItems",
+        "MyrmexAIPickupBabies",
+        "PixieAIFlee",
+        "PixieAIPickupItem"
+      ],
+      "bestiary_readLines_count": 2,
+      "mapped_sha256": "f2dbcbce3e5c22deec39d797733e93fb2f943946b288503f289d46f747a516b5"
+    }
+  }
+}

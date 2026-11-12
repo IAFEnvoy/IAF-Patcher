@@ -1,0 +1,135 @@
+{
+  "date": "2026-11-12",
+  "patcher_base_commit": "1b8c9b78c39abcfdb2b59276f995f79e180c5514",
+  "mod_version": "1.3.1",
+  "new_mixins": [
+    "CyclopsMovementMixin",
+    "HydraHeadIndexMixin",
+    "MultipartCollisionMixin",
+    "ai.DragonAIMateMixin",
+    "ai.PixieAIFleeMixin",
+    "ai.SearchCooldownMixin",
+    "ai.SheepFollowCyclopsMixin",
+    "ai.WatchClosestIgnoreRiderMixin"
+  ],
+  "production_build": {
+    "command": "./gradlew.bat :1.16.5:clean :1.18.2:clean :1.19.2:clean :1.20.1:clean :1.16.5:build :1.18.2:build :1.19.2:build :1.20.1:build --offline --console=plain",
+    "log": "build/simple-patches-production-final.log",
+    "log_sha256": "b37a503bd20a8819a5c6b28f1af3cc94f49eacceefd2d697031515ddc718f79e"
+  },
+  "artifacts": {
+    "1.16.5": {
+      "path": "versions/1.16.5/build/libs/iaf_patcher-1.3.1-1.16.5.jar",
+      "bytes": 66888,
+      "sha256": "20b3bfd5956278e3bfbedc8c4df032fd7a74560dd90936e8f398adc19e06bac8",
+      "class_file_major": 52,
+      "class_count": 30,
+      "all_new_mixins_present": true,
+      "new_injection_refmaps_present": true,
+      "remapped_mating_continuation_method": "func_75253_b()Z",
+      "regression_classes_present": false
+    },
+    "1.18.2": {
+      "path": "versions/1.18.2/build/libs/iaf_patcher-1.3.1-1.18.2.jar",
+      "bytes": 67451,
+      "sha256": "fc28aec406fb0779381a9f544407794f69ffd29d6314e88919abb581c2572695",
+      "class_file_major": 61,
+      "class_count": 31,
+      "all_new_mixins_present": true,
+      "new_injection_refmaps_present": true,
+      "remapped_mating_continuation_method": "m_8045_()Z",
+      "regression_classes_present": false
+    },
+    "1.19.2": {
+      "path": "versions/1.19.2/build/libs/iaf_patcher-1.3.1-1.19.2.jar",
+      "bytes": 67404,
+      "sha256": "3e20f38ea263cfab61943ec957281a3e5df444adffe9d94a470e7d0f470ddd7c",
+      "class_file_major": 61,
+      "class_count": 31,
+      "all_new_mixins_present": true,
+      "new_injection_refmaps_present": true,
+      "remapped_mating_continuation_method": "m_8045_()Z",
+      "regression_classes_present": false
+    },
+    "1.20.1": {
+      "path": "versions/1.20.1/build/libs/iaf_patcher-1.3.1-1.20.1.jar",
+      "bytes": 67162,
+      "sha256": "ae2b876b6036d6a7eccb355a844ab6bdc11f5546611f640ec0f21599100c5e6a",
+      "class_file_major": 61,
+      "class_count": 31,
+      "all_new_mixins_present": true,
+      "new_injection_refmaps_present": true,
+      "remapped_mating_continuation_method": "m_8045_()Z",
+      "regression_classes_present": false
+    }
+  },
+  "dedicated_server_results": {
+    "1.18.2": {
+      "path": "build/patch-regression/1.18.2/patch-regression-result.txt",
+      "sha256": "1d0759fe4cde8e57139337604d58660860b562bfd945d039c3a2ca049a74c806",
+      "result_lines": [
+        "PASS: all new Mixin targets loaded on a real Forge dedicated server.",
+        "Behavior regression suite is available for 1.20.1 only."
+      ]
+    },
+    "1.19.2": {
+      "path": "build/patch-regression/1.19.2/patch-regression-result.txt",
+      "sha256": "1d0759fe4cde8e57139337604d58660860b562bfd945d039c3a2ca049a74c806",
+      "result_lines": [
+        "PASS: all new Mixin targets loaded on a real Forge dedicated server.",
+        "Behavior regression suite is available for 1.20.1 only."
+      ]
+    },
+    "1.20.1": {
+      "path": "build/patch-regression/1.20.1/patch-regression-result.txt",
+      "sha256": "12cbc70af6864518f5196bfdcae172042cb31ed5e98732a1913a83a67ed7b9cd",
+      "result_lines": [
+        "PASS: all new Mixin targets loaded on a real Forge dedicated server.",
+        "PASS: odd-phase food search",
+        "PASS: search deadlines and time rollback",
+        "PASS: dragon mating continuation",
+        "PASS: sheep follows living cyclops",
+        "PASS: pixie flees until arrival",
+        "PASS: look goal excludes riders",
+        "PASS: hydra head indices",
+        "PASS: one collision query per part tick",
+        "PASS: cyclops slowdown is applied"
+      ]
+    },
+    "1.16.5": {
+      "status": "blocked before regression by existing mapped upstream dependency",
+      "class": "com.github.alexthe666.iceandfire.entity.EntityDreadScuttler",
+      "duplicate_method": "getScale()F",
+      "method_count": 2,
+      "mapped_dependency_sha256": "3f5143d802a5ca9dadc774609cc6ad7ad2f84e9afe5b9ac0365b225b06326457",
+      "matches_pre_patch_dependency_sha256": true,
+      "crash_report": "build/patch-regression/1.16.5/crash-reports/crash-2026-11-12_20.30.20-fml.txt"
+    }
+  },
+  "baseline_without_new_mixins": {
+    "version": "1.20.1",
+    "path": "build/patch-regression/1.20.1/baseline-result.txt",
+    "sha256": "4e6bc98e1664e79a4cd21e30220170300efb2cecc13346d29073bd4087d684a1",
+    "expected_failing_checks": 9,
+    "result_lines": [
+      "FAIL: java.lang.AssertionError: ",
+      "FAIL: odd-phase food search - java.lang.AssertionError: odd-phase goal never found newly dropped food",
+      "FAIL: search deadlines and time rollback - java.lang.AssertionError: search redirect was not merged",
+      "FAIL: dragon mating continuation - java.lang.AssertionError: valid mating stopped or re-ran canUse",
+      "FAIL: sheep follows living cyclops - java.lang.AssertionError: sheep rejected living cyclops",
+      "FAIL: pixie flees until arrival - java.lang.AssertionError: pixie stopped before reaching its hiding place",
+      "FAIL: look goal excludes riders - java.lang.AssertionError: observer field is uninitialized",
+      "FAIL: hydra head indices - java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 9",
+      "FAIL: one collision query per part tick - java.lang.AssertionError: collision query count was 2 for slow=true",
+      "FAIL: cyclops slowdown is applied - java.lang.AssertionError: slowdown vector was discarded",
+      ""
+    ]
+  },
+  "not_tested": [
+    "client gameplay",
+    "multiplayer gameplay",
+    "long-running survival world",
+    "FPS or MSPT benchmark",
+    "full behavior suite on older versions"
+  ]
+}

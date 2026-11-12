@@ -20,6 +20,14 @@ apply(plugin = "org.spongepowered.mixin")
 group = project.property("mod.group") as String
 version = (project.property("mod.version") as String) + "-" + (project.property("deps.minecraft") as String)
 
+val patchRegression = providers.gradleProperty("patchRegression").isPresent
+if (patchRegression) {
+    sourceSets.main.get().java.srcDir(rootProject.file("src/patchRegression/java"))
+    if (stonecutter.current.version == "1.20.1") {
+        sourceSets.main.get().java.srcDir(rootProject.file("src/patchRegression-1.20.1/java"))
+    }
+}
+
 base {
     archivesName.set(project.property("mod.id") as String)
 }
@@ -45,9 +53,14 @@ minecraft {
     runs {
         // applies to all the run configs below
         configureEach {
-            workingDirectory = "run"
+            workingDirectory = if (patchRegression) rootProject.file("build/patch-regression/${stonecutter.current.version}").path else "run"
             property("forge.logging.markers", "REGISTRIES")
             property("forge.logging.console.level", "debug")
+            if (patchRegression) {
+                property("mixin.debug.verbose", "true")
+                property("mixin.debug.export", "true")
+                property("mixin.checks.interfaces", "true")
+            }
 
             mods {
                 create(project.property("mod.id") as String) {
