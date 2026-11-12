@@ -3,12 +3,9 @@
 This is a mod to fix some critical bugs and crashes in mod
 [Ice And Fire](https://www.curseforge.com/minecraft/mc-mods/ice-and-fire-dragons).
 
-Current maintaining versions: 1.16.5, 1.18.2, 1.19.2.
+Current maintaining versions: 1.16.5, 1.18.2, 1.19.2, 1.20.1.
 
 **1.15.2 & 1.17.1 stopped maintaining due to few players.**
-
-**1.20.1 stopped maintaining, please use [IceAndFire CE](https://www.curseforge.com/minecraft/mc-mods/iceandfire-ce)
-Instead.**
 
 ## Currently fixed:
 

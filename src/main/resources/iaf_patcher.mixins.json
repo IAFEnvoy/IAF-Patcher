@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "com.iafenvoy.iafpatcher.mixin",
   "plugin": "com.iafenvoy.iafpatcher.IAFPMixinPlugin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "${mixin_compatibility_level}",
   "refmap": "iaf_patcher.refmap.json",
   "mixins": [
     "CitadelMixin",

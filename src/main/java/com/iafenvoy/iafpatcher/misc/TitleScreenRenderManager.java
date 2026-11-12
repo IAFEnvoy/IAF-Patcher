@@ -5,12 +5,17 @@ import com.github.alexthe666.iceandfire.IceAndFire;
 import com.iafenvoy.iafpatcher.IceAndFirePatcher;
 import com.iafenvoy.iafpatcher.util.RandomHelper;
 import com.mojang.blaze3d.systems.RenderSystem;
+//? <1.20 {
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Matrix4f;
+import net.minecraft.client.renderer.*;
+//?} else {
+/*import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.SplashRenderer;
+*///?}
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.renderer.*;
 import net.minecraft.resources.ResourceLocation;
 
 import java.io.BufferedReader;
@@ -50,7 +55,7 @@ public class TitleScreenRenderManager {
         resetDrawnImages();
     }
 
-    public static String getSplash() {
+    public static /*? >=1.20 {*//*SplashRenderer*//*?} else {*/String/*?}*/ getSplash() {
         if (splashText == null)
             try {
                 //? >=1.19 {
@@ -64,7 +69,8 @@ public class TitleScreenRenderManager {
                 splashText = new ArrayList<>();
             }
         if (splashText.isEmpty()) return null;
-        return splashText.get(RandomHelper.nextInt(0, splashText.size() - 1));
+        String text = splashText.get(RandomHelper.nextInt(0, splashText.size() - 1));
+        return /*? >=1.20 {*//*new SplashRenderer(text)*//*?} else {*/text/*?}*/;
     }
 
     private static void resetDrawnImages() {
@@ -100,7 +106,7 @@ public class TitleScreenRenderManager {
         layerTick++;
     }
 
-    public static void renderBackground(PoseStack ms, int width, int height) {
+    public static void renderBackground(/*? >=1.20 {*//*GuiGraphics*//*?} else {*/PoseStack/*?}*/ ms, int width, int height) {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableBlend();
 
@@ -125,12 +131,17 @@ public class TitleScreenRenderManager {
         }
     }
 
-    public static void drawModName(PoseStack ms, int height, int alphaFormatted) {
+    public static void drawModName(/*? >=1.20 {*//*GuiGraphics*//*?} else {*/PoseStack/*?}*/ ms, int height, int alphaFormatted) {
         int textColor = 0x00FFFFFF | alphaFormatted;
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableBlend();
+        //? >=1.20 {
+        /*ms.drawString(textRenderer, "Ice and Fire " + ChatFormatting.GOLD + IceAndFire.VERSION, 2, height - 60, textColor, false);
+        ms.drawString(textRenderer, "IAF Patcher " + ChatFormatting.GOLD + IceAndFirePatcher.VERSION, 2, height - 50, textColor, false);
+        *///?} else {
         textRenderer.draw(ms, "Ice and Fire " + ChatFormatting.GOLD + IceAndFire.VERSION, 2, height - 60, textColor);
         textRenderer.draw(ms, "IAF Patcher " + ChatFormatting.GOLD + IceAndFirePatcher.VERSION, 2, height - 50, textColor);
+        //?}
     }
 
     private static class Picture {
@@ -147,10 +158,15 @@ public class TitleScreenRenderManager {
         }
     }
 
-    public static void blit(PoseStack ms, ResourceLocation location, int x, int y, float u, float v, int width, int height, int textureWidth, int textureHeight) {
+    public static void blit(/*? >=1.20 {*//*GuiGraphics*//*?} else {*/PoseStack/*?}*/ ms, ResourceLocation location, int x, int y, float u, float v, int width, int height, int textureWidth, int textureHeight) {
+        //? >=1.20 {
+        /*ms.blit(location, x, y, u, v, width, height, textureWidth, textureHeight);
+        *///?} else {
         innerBlit(ms, location, x, x + width, y, y + height, u / textureWidth, (u + width) / textureWidth, v / textureHeight, (v + height) / textureHeight);
+        //?}
     }
 
+    //? <1.20 {
     private static void innerBlit(PoseStack stack, ResourceLocation location, int x1, int x2, int y1, int y2, float u1, float u2, float v1, float v2) {
         RenderSystem.setShaderTexture(0, location);
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
@@ -168,4 +184,5 @@ public class TitleScreenRenderManager {
         BufferUploader.end(var12);
         *///?}
     }
+    //?}
 }

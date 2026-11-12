@@ -29,8 +29,6 @@ java {
         JavaLanguageVersion.of(
             when {
                 stonecutter.eval(stonecutter.current.version, ">=1.18") -> 17
-                //We should use 17 on 1.17 due to wrong mixin config in I&F
-                stonecutter.eval(stonecutter.current.version, ">=1.17") -> 17
                 else -> 8
             }
         )
@@ -95,9 +93,26 @@ tasks.withType<JavaCompile>().configureEach {
 }
 
 tasks.named<ProcessResources>("processResources") {
+    if (stonecutter.eval(stonecutter.current.version, ">=1.20")) {
+        from(rootProject.file("src/main/resources-1.20"))
+    }
+
     val replaceProperties = mapOf(
         "minecraft_version" to project.property("deps.minecraft") as String,
         "minecraft_version_range" to "[${project.property("deps.minecraft") as String}]",
+        "mixin_compatibility_level" to "JAVA_${java.toolchain.languageVersion.get().asInt()}",
+        "pack_format" to when {
+            stonecutter.eval(stonecutter.current.version, ">=1.20") -> 15
+            stonecutter.eval(stonecutter.current.version, ">=1.19") -> 9
+            stonecutter.eval(stonecutter.current.version, ">=1.18") -> 8
+            else -> 6
+        },
+        "server_data_pack_format" to when {
+            stonecutter.eval(stonecutter.current.version, ">=1.20") -> 15
+            stonecutter.eval(stonecutter.current.version, ">=1.19") -> 10
+            stonecutter.eval(stonecutter.current.version, ">=1.18") -> 9
+            else -> 6
+        },
         "forge_version" to project.property("deps.forge") as String,
         "forge_version_range" to "[0,)",
         "loader_version_range" to "[0,)",
@@ -111,7 +126,7 @@ tasks.named<ProcessResources>("processResources") {
 
     inputs.properties(replaceProperties)
 
-    filesMatching(listOf("META-INF/mods.toml", "pack.mcmeta")) {
+    filesMatching(listOf("META-INF/mods.toml", "pack.mcmeta", "*.mixins.json")) {
         expand(replaceProperties + mapOf("project" to project))
     }
 }

@@ -3,7 +3,14 @@ package com.iafenvoy.iafpatcher.mixin;
 //? >=1.17 {
 import com.github.alexthe666.iceandfire.IafConfig;
 import com.iafenvoy.iafpatcher.misc.TitleScreenRenderManager;
+//? >=1.20 {
+/*import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.SplashRenderer;
+import net.minecraft.client.renderer.PanoramaRenderer;
+import org.spongepowered.asm.mixin.injection.Redirect;
+*///?} else {
 import com.mojang.blaze3d.vertex.PoseStack;
+//?}
 import net.minecraft.Util;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
@@ -22,7 +29,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(TitleScreen.class)
 public abstract class TitleScreenMixin extends Screen {
     @Shadow
-    private String splash;
+    private /*? >=1.20 {*//*SplashRenderer*//*?} else {*/String/*?}*/ splash;
 
     @Shadow
     @Final
@@ -38,7 +45,7 @@ public abstract class TitleScreenMixin extends Screen {
     @Inject(method = "init", at = @At("RETURN"))
     private void onInit(CallbackInfo ci) {
         if (!IafConfig.customMainMenu) return;
-        String text = TitleScreenRenderManager.getSplash();
+        /*? >=1.20 {*//*SplashRenderer*//*?} else {*/String/*?}*/ text = TitleScreenRenderManager.getSplash();
         if (text != null)
             this.splash = text;
     }
@@ -49,8 +56,15 @@ public abstract class TitleScreenMixin extends Screen {
         TitleScreenRenderManager.tick();
     }
 
+    //? >=1.20 {
+    /*@Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/PanoramaRenderer;render(FF)V"))
+    private void renderPanorama(PanoramaRenderer instance, float delta, float alpha) {
+        if (!IafConfig.customMainMenu) instance.render(delta, alpha);
+    }
+    *///?}
+
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/PanoramaRenderer;render(FF)V", shift = At.Shift.AFTER))
-    private void onRenderBackground(PoseStack poseStack, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+    private void onRenderBackground(/*? >=1.20 {*//*GuiGraphics*//*?} else {*/PoseStack/*?}*/ poseStack, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         if (!IafConfig.customMainMenu) return;
         TitleScreenRenderManager.renderBackground(poseStack, this.width, this.height);
         float f = this.fading ? (float) (Util.getMillis() - this.fadeInStart) / 1000.0F : 1.0F;
