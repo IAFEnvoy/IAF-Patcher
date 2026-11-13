@@ -21,14 +21,24 @@ group = project.property("mod.group") as String
 version = (project.property("mod.version") as String) + "-" + (project.property("deps.minecraft") as String)
 
 val featureRegression = providers.gradleProperty("featureRegression").isPresent
-val patchRegression = featureRegression || providers.gradleProperty("patchRegression").isPresent
+val movementRegression = providers.gradleProperty("movementRegression").isPresent
+val patchRegression = featureRegression || movementRegression || providers.gradleProperty("patchRegression").isPresent
 if (patchRegression) {
     sourceSets.main.get().java.srcDir(rootProject.file("src/patchRegression/java"))
     if (stonecutter.current.version == "1.20.1") {
         sourceSets.main.get().java.srcDir(rootProject.file("src/patchRegression-1.20.1/java"))
     }
+    if (stonecutter.current.version == "1.16.5") {
+        sourceSets.main.get().java.srcDir(rootProject.file("src/patchRegression-1.16.5/java"))
+    }
     if (featureRegression && stonecutter.eval(stonecutter.current.version, ">=1.18")) {
         sourceSets.main.get().java.srcDir(rootProject.file("src/featureRegression/java"))
+    }
+    if (movementRegression && stonecutter.eval(stonecutter.current.version, ">=1.18")) {
+        sourceSets.main.get().java.srcDir(rootProject.file("src/movementRegression/java"))
+    }
+    if (movementRegression && stonecutter.current.version == "1.16.5") {
+        sourceSets.main.get().java.srcDir(rootProject.file("src/movementRegression-1.16.5/java"))
     }
 }
 
@@ -58,6 +68,7 @@ minecraft {
         // applies to all the run configs below
         configureEach {
             workingDirectory = when {
+                movementRegression -> rootProject.file("build/movement-regression/${stonecutter.current.version}").path
                 featureRegression -> rootProject.file("build/feature-regression/${stonecutter.current.version}").path
                 patchRegression -> rootProject.file("build/patch-regression/${stonecutter.current.version}").path
                 else -> "run"

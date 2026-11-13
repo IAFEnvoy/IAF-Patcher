@@ -37,16 +37,28 @@ public final class MixinApplicationSmoke {
             }
             result = "PASS: all new Mixin targets loaded on a real Forge dedicated server.\n";
             try {
+                Class<?> regression = Class.forName("com.iafenvoy.iafpatcher.regression.LegacyMappingRegression");
+                result += regression.getMethod("run", Object.class).invoke(null, server);
+            } catch (ClassNotFoundException ignored) {
+                // The mapping collision exists only on 1.16.5 with official development names.
+            }
+            try {
                 Class<?> regression = Class.forName("com.iafenvoy.iafpatcher.regression.SimplePatchRegression");
                 result += regression.getMethod("run", Object.class).invoke(null, server);
             } catch (ClassNotFoundException ignored) {
-                result += "Behavior regression suite is available for 1.20.1 only.\n";
+                result += "The earlier simple-patch behavior suite is available for 1.20.1 only.\n";
             }
             try {
                 Class<?> regression = Class.forName("com.iafenvoy.iafpatcher.regression.FeatureRegression");
                 result += regression.getMethod("run", Object.class).invoke(null, server);
             } catch (ClassNotFoundException ignored) {
                 // Feature checks are only included with -PfeatureRegression on 1.18.2 and later.
+            }
+            try {
+                Class<?> regression = Class.forName("com.iafenvoy.iafpatcher.regression.MovementRegression");
+                result += regression.getMethod("run", Object.class).invoke(null, server);
+            } catch (ClassNotFoundException ignored) {
+                // Movement checks are only included with -PmovementRegression.
             }
         } catch (Throwable failure) {
             if (failure instanceof InvocationTargetException) failure = ((InvocationTargetException) failure).getCause();

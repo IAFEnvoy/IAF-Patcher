@@ -1,0 +1,208 @@
+{
+  "date": "2026-11-13",
+  "project": "E:/Java/IAF-Patcher",
+  "branch": "stonecutter",
+  "mod_version": "2.0-beta.1",
+  "issues": [
+    18,
+    20
+  ],
+  "new_mixins": {
+    "AmphithereFlightMixin": [
+      "1.16.5",
+      "1.18.2",
+      "1.19.2",
+      "1.20.1"
+    ],
+    "HippocampusSwimmingMixin": [
+      "1.20.1"
+    ],
+    "dev.LegacyScaleMappingMixin": [
+      "1.16.5 development only"
+    ]
+  },
+  "method": "Actual transformed upstream entities/controllers on Forge dedicated servers; injected stale input, entity ticks, terrain and water fixtures. No player-client or multiplayer session.",
+  "versions": {
+    "1.18.2": {
+      "build": "passed",
+      "mixin_runtime": "passed",
+      "behavior_checks_passed": 6,
+      "checks": [
+        "dismount clears controls",
+        "flute landing rejects stale takeoff input",
+        "rider controls survive while mounted",
+        "autonomous flight recovers from stale movement input",
+        "high flight targets descend over land and water",
+        "autonomous flight returns from high altitude"
+      ],
+      "log": "E:\\Java\\IAF-Patcher\\build\\issues-18-20-review\\patched-1.18.2.log",
+      "movement_observations": [
+        "IAFP_MOVEMENT flight noGravity=false start=180.0 end=180.0 yya=0.0",
+        "IAFP_MOVEMENT flight noGravity=true start=180.0 end=180.0 yya=0.0",
+        "IAFP_MOVEMENT autonomous highest=222.74088551267795 lowest=-60.0 end=(-0.247016248830097, -45.539267007819014, -11.644398816608854)"
+      ],
+      "existing_simple_patch_checks_passed": "not run"
+    },
+    "1.19.2": {
+      "build": "passed",
+      "mixin_runtime": "passed",
+      "behavior_checks_passed": 6,
+      "checks": [
+        "dismount clears controls",
+        "flute landing rejects stale takeoff input",
+        "rider controls survive while mounted",
+        "autonomous flight recovers from stale movement input",
+        "high flight targets descend over land and water",
+        "autonomous flight returns from high altitude"
+      ],
+      "log": "E:\\Java\\IAF-Patcher\\build\\issues-18-20-review\\patched-1.19.2.log",
+      "movement_observations": [
+        "IAFP_MOVEMENT flight noGravity=false start=180.0 end=180.0 yya=0.0",
+        "IAFP_MOVEMENT flight noGravity=true start=180.0 end=180.0 yya=0.0",
+        "IAFP_MOVEMENT autonomous highest=222.74088551267795 lowest=-60.0 end=(-17.034998172715316, -47.4283336945176, -15.350445202258062)"
+      ],
+      "existing_simple_patch_checks_passed": "not run"
+    },
+    "1.20.1": {
+      "build": "passed",
+      "mixin_runtime": "passed",
+      "behavior_checks_passed": 8,
+      "checks": [
+        "dismount clears controls",
+        "flute landing rejects stale takeoff input",
+        "rider controls survive while mounted",
+        "autonomous flight recovers from stale movement input",
+        "high flight targets descend over land and water",
+        "autonomous flight returns from high altitude",
+        "hippocampus idle swimming holds depth",
+        "hippocampus dives from surface without affecting riders"
+      ],
+      "log": "E:\\Java\\IAF-Patcher\\build\\issues-18-20-review\\patched-1.20.1.log",
+      "movement_observations": [
+        "IAFP_MOVEMENT flight noGravity=false start=180.0 end=180.0 yya=0.0",
+        "IAFP_MOVEMENT flight noGravity=true start=180.0 end=180.0 yya=0.0",
+        "IAFP_MOVEMENT autonomous highest=222.14515779199328 lowest=-45.858503438143075 end=(1.6777510553769623, -45.858503438143075, -7.872340577861356)"
+      ],
+      "existing_simple_patch_checks_passed": 9
+    },
+    "1.16.5": {
+      "build": "passed",
+      "mixin_runtime": "passed",
+      "behavior_checks_passed": 6,
+      "checks": [
+        "dismount clears controls",
+        "flute landing rejects stale takeoff input",
+        "rider controls survive while mounted",
+        "autonomous flight recovers from stale movement input",
+        "high flight targets descend over land and water",
+        "autonomous flight returns from high altitude"
+      ],
+      "mapping_check": "all three dread entities load, retain scale and persist it",
+      "runtime_log": "E:\\Java\\IAF-Patcher\\build\\dev-mapping-repair\\movement-1.16.5-final.log",
+      "movement_observations": [
+        "IAFP_MOVEMENT flight noGravity=false start=180.0 end=180.0 yya=0.0",
+        "IAFP_MOVEMENT flight noGravity=true start=180.0 end=180.0 yya=0.0",
+        "IAFP_MOVEMENT autonomous highest=222.74112474802556 lowest=4.0 end=(-10.188037777769955, 6.45857748680699, 6.4927720729648986)"
+      ],
+      "existing_simple_patch_checks_passed": "not run"
+    }
+  },
+  "artifacts": {
+    "1.16.5": {
+      "path": "E:\\Java\\IAF-Patcher\\versions\\1.16.5\\build\\libs\\iaf_patcher-2.0-beta.1-1.16.5.jar",
+      "sha256": "63156f6b0a16a6f81a4a084f49495ee266273e4a8fa0ce2312df3fc47b6403b9",
+      "size_bytes": 86975,
+      "regression_classes": false,
+      "amphithere_mixin": true,
+      "hippocampus_mixin": false,
+      "mapped_methods": {
+        "aiStep": "Lcom/github/alexthe666/iceandfire/entity/EntityAmphithere;func_70636_d()V",
+        "tick": "Lcom/github/alexthe666/iceandfire/entity/EntityAmphithere;func_70071_h_()V"
+      },
+      "legacy_mapping_hook": true
+    },
+    "1.18.2": {
+      "path": "E:\\Java\\IAF-Patcher\\versions\\1.18.2\\build\\libs\\iaf_patcher-2.0-beta.1-1.18.2.jar",
+      "sha256": "956947d14e7e022420eedfca8e357d1ec9a2ea438b58e2c23e3d2e1b4eba271a",
+      "size_bytes": 85349,
+      "regression_classes": false,
+      "amphithere_mixin": true,
+      "hippocampus_mixin": false,
+      "mapped_methods": {
+        "aiStep": "Lcom/github/alexthe666/iceandfire/entity/EntityAmphithere;m_8107_()V",
+        "tick": "Lcom/github/alexthe666/iceandfire/entity/EntityAmphithere;m_8119_()V"
+      },
+      "legacy_mapping_hook": false
+    },
+    "1.19.2": {
+      "path": "E:\\Java\\IAF-Patcher\\versions\\1.19.2\\build\\libs\\iaf_patcher-2.0-beta.1-1.19.2.jar",
+      "sha256": "f9b48aff392616ae8daef0a9942f37e4811dad24819b7cf54ffa6733b3f2228e",
+      "size_bytes": 85150,
+      "regression_classes": false,
+      "amphithere_mixin": true,
+      "hippocampus_mixin": false,
+      "mapped_methods": {
+        "aiStep": "Lcom/github/alexthe666/iceandfire/entity/EntityAmphithere;m_8107_()V",
+        "tick": "Lcom/github/alexthe666/iceandfire/entity/EntityAmphithere;m_8119_()V"
+      },
+      "legacy_mapping_hook": false
+    },
+    "1.20.1": {
+      "path": "E:\\Java\\IAF-Patcher\\versions\\1.20.1\\build\\libs\\iaf_patcher-2.0-beta.1-1.20.1.jar",
+      "sha256": "738f8eb94600e76be34ea54326885afa22b06848699fbb0537158e388d451811",
+      "size_bytes": 86039,
+      "regression_classes": false,
+      "amphithere_mixin": true,
+      "hippocampus_mixin": true,
+      "mapped_methods": {
+        "tick": "Lcom/github/alexthe666/iceandfire/entity/EntityAmphithere;m_8119_()V"
+      },
+      "legacy_mapping_hook": false
+    }
+  },
+  "production_build_log": "E:\\Java\\IAF-Patcher\\build\\dev-mapping-repair\\production-build.log",
+  "feature_regression": {
+    "features-1.20.1.log": {
+      "feature_checks": 9,
+      "simple_patch_checks": 9,
+      "status": "passed"
+    },
+    "features-1.20.1-repeat.log": {
+      "feature_checks": 9,
+      "simple_patch_checks": 9,
+      "status": "passed"
+    }
+  },
+  "limitations": [
+    "No player-client, multiplayer or long survival verification; no FPS/MSPT benchmark.",
+    "An initial existing dragon-meal regression check failed once; no dragon-meal product changes were made. Expanded diagnostic assertion, then two full feature runs passed. Initial cause remains undetermined."
+  ],
+  "baseline_1_20_1": {
+    "log": "E:\\Java\\IAF-Patcher\\build\\issues-18-20-review\\baseline-1.20.1.log",
+    "observations": [
+      "IAFP_MOVEMENT flight start=180.0 end=329.8589347452249 yya=1.0"
+    ],
+    "expected_failures": [
+      "dismounted control byte remains 15",
+      "vertical movement input remains 1",
+      "high autonomous target remains at Y=220",
+      "idle hippocampus rises from Y=94.005 to Y=99.784975",
+      "surface hippocampus does not dive"
+    ]
+  },
+  "final_1_16_5_build_log": "E:\\Java\\IAF-Patcher\\build\\dev-mapping-repair\\production-1.16.5-final.log",
+  "development_mapping_repair": {
+    "date": "2026-11-13",
+    "targets": [
+      "EntityDreadBeast",
+      "EntityDreadGhoul",
+      "EntityDreadScuttler"
+    ],
+    "cause": "func_213355_cm()F maps to getScale()F, colliding with the custom data-backed getter",
+    "transformation": "Remove exactly one recursive forwarding method in preApply, preserving the real getter",
+    "enabled_in_production": false,
+    "original_and_mapped_dependency_hashes_unchanged": true,
+    "original_jar_sha256": "29e66bd0199169649f6de4e4b0ef00a67555eb348f10b8d01794c20d67f128c8",
+    "mapped_jar_sha256": "3f5143d802a5ca9dadc774609cc6ad7ad2f84e9afe5b9ac0365b225b06326457"
+  }
+}

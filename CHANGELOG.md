@@ -10,3 +10,6 @@
 - Fix pixies ignoring custom food tags when searching for dropped items on Minecraft 1.19.2 and 1.20.1.
 - Add a server config option for normal dragon meals to resume growth after sickly dragon meals, enabled by default.
 - Add optional hippocampus immunity to bubble columns, disabled by default.
+- Fix amphitheres retaining rider input after dismounting and taking off again after flute-induced landings. Clear stale movement input, correct autonomous lift on older versions, and give high-flying wanderers descending targets over loaded terrain (#18).
+- Fix hippocampuses continuously floating to the surface on Minecraft 1.20.1. Remove unconditional upward buoyancy and let idle, unmounted hippocampuses dive slightly below the surface without affecting rider controls or active navigation (#20).
+- Fix 1.16.5 development startup with official mappings by removing conflicting forwarding scale getters from three Dread entities during class transformation. This workaround is disabled in production environments.

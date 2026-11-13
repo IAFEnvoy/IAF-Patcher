@@ -24,12 +24,15 @@ Current maintaining versions: 1.16.5, 1.18.2, 1.19.2, 1.20.1.
 - Invalid or stale Hydra head indices can cause an out-of-bounds access when hurt.
 - Slow multipart entities perform the same collision query twice per tick.
 - Cyclops tree-breaking slowdown discards the updated movement vector.
+- Amphitheres retain rider input after dismounting, drift upward, or keep choosing high-altitude wander targets.
+- (1.20.1) Hippocampuses continuously float to the surface instead of swimming underwater.
 
 ## Enhancements
 
 - Add `iceandfire:pixie_stolen_blacklist` tag.
 - Add some golden items into `minecraft:piglin_loved` tag to let piglin pick up them.
-- Backport breeding, healing and item-based taming food tags to 1.16.5 and 1.18.2, matching the native tags in 1.19.2 and 1.20.1.
+- Backport breeding, healing and item-based taming food tags to 1.16.5 and 1.18.2, matching the native tags in 1.19.2
+  and 1.20.1.
 - Allow normal dragon meals to resume growth after sickly dragon meals (configurable, enabled by default).
 - Add optional hippocampus immunity to bubble columns (disabled by default).
 

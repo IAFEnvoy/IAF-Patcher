@@ -18,6 +18,7 @@
     "MultipartCollisionMixin",
     "DragonMealGrowthMixin",
     "HippocampusBubbleColumnMixin",
+    "AmphithereFlightMixin",
     "food.FoodSearchMixin",
     "ai.DragonAIMateMixin",
     "ai.PixieAIFleeMixin",

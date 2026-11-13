@@ -169,7 +169,10 @@ public final class FeatureRegression {
             require(dragon.isAgingDisabled() && dragon.getAgeInDays() == 30, "disabled option changed growth");
             IAFPConfig.DRAGON_MEAL_RESTORES_GROWTH.set(true);
             dragon.mobInteract(player, InteractionHand.MAIN_HAND);
-            require(!dragon.isAgingDisabled() && dragon.getAgeInDays() == 31, "enabled option did not resume growth");
+            require(!dragon.isAgingDisabled() && dragon.getAgeInDays() == 31,
+                    "enabled option did not resume growth: disabled=" + dragon.isAgingDisabled()
+                            + ", age=" + dragon.getAgeInDays() + ", owned=" + dragon.isOwnedBy(player)
+                            + ", food=" + player.getMainHandItem() + ", config=" + IAFPConfig.DRAGON_MEAL_RESTORES_GROWTH.get());
             require(player.getMainHandItem().isEmpty(), "normal food consumption changed");
             CompoundTag saved = new CompoundTag();
             dragon.addAdditionalSaveData(saved);
