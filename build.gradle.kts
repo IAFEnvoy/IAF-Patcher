@@ -22,7 +22,9 @@ version = (project.property("mod.version") as String) + "-" + (project.property(
 
 val featureRegression = providers.gradleProperty("featureRegression").isPresent
 val movementRegression = providers.gradleProperty("movementRegression").isPresent
-val patchRegression = featureRegression || movementRegression || providers.gradleProperty("patchRegression").isPresent
+val lightningRegression = providers.gradleProperty("lightningRegression").isPresent
+val lightningVisualRegression = providers.gradleProperty("lightningVisualRegression").isPresent
+val patchRegression = featureRegression || movementRegression || lightningRegression || providers.gradleProperty("patchRegression").isPresent
 if (patchRegression) {
     sourceSets.main.get().java.srcDir(rootProject.file("src/patchRegression/java"))
     if (stonecutter.current.version == "1.20.1") {
@@ -40,6 +42,14 @@ if (patchRegression) {
     if (movementRegression && stonecutter.current.version == "1.16.5") {
         sourceSets.main.get().java.srcDir(rootProject.file("src/movementRegression-1.16.5/java"))
     }
+    if (lightningRegression) {
+        sourceSets.main.get().java.srcDir(rootProject.file(if (stonecutter.current.version == "1.16.5")
+            "src/lightningRegression-1.16.5/java" else "src/lightningRegression/java"))
+    }
+}
+if (lightningVisualRegression) {
+    sourceSets.main.get().java.srcDir(rootProject.file(if (stonecutter.current.version == "1.16.5")
+        "src/lightningVisualRegression-1.16.5/java" else "src/lightningVisualRegression/java"))
 }
 
 base {
@@ -68,6 +78,8 @@ minecraft {
         // applies to all the run configs below
         configureEach {
             workingDirectory = when {
+                lightningVisualRegression -> rootProject.file("build/lightning-visual/${stonecutter.current.version}/${name}").path
+                lightningRegression -> rootProject.file("build/lightning-regression/${stonecutter.current.version}").path
                 movementRegression -> rootProject.file("build/movement-regression/${stonecutter.current.version}").path
                 featureRegression -> rootProject.file("build/feature-regression/${stonecutter.current.version}").path
                 patchRegression -> rootProject.file("build/patch-regression/${stonecutter.current.version}").path

@@ -55,6 +55,12 @@ public final class MixinApplicationSmoke {
                 // Feature checks are only included with -PfeatureRegression on 1.18.2 and later.
             }
             try {
+                Class<?> regression = Class.forName("com.iafenvoy.iafpatcher.regression.LightningRegression");
+                result += regression.getMethod("run", Object.class).invoke(null, server);
+            } catch (ClassNotFoundException ignored) {
+                // Only included with -PlightningRegression.
+            }
+            try {
                 Class<?> regression = Class.forName("com.iafenvoy.iafpatcher.regression.MovementRegression");
                 result += regression.getMethod("run", Object.class).invoke(null, server);
             } catch (ClassNotFoundException ignored) {

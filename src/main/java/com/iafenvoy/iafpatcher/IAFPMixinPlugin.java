@@ -22,6 +22,11 @@ public class IAFPMixinPlugin implements IMixinConfigPlugin {
     @Override
     public List<String> getMixins() {
         List<String> mixins = new LinkedList<>();
+        //? >=1.17 {
+        mixins.add("DragonsteelLightningMixin");
+        //?} else {
+        /*mixins.add("LegacyDragonsteelLightningMixin");
+        *///?}
         //? <1.17 {
         /*if (!FMLEnvironment.production) mixins.add("dev.LegacyScaleMappingMixin");
         *///?}

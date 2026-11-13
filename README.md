@@ -17,7 +17,7 @@ Current maintaining versions: 1.16.5, 1.18.2, 1.19.2, 1.20.1.
 - Pixie jar color not correct after rejoin world.
 - Hippogryphs will fly too high and suck.
 - Fire Dragon Bone Sword & Fire Dragon Steel Sword&Tools cannot cook drops.
-- (1.20.1) Gorgon will break all when it attacks player.
+- (1.20.1) Gorgon will break all armors when it attacks player.
 - (1.18.2–1.20.1) AI searches can miss every refresh tick and stop finding food or targets.
 - Dragon mating uses the wrong continuation method; sheep following and pixie fleeing stop too early.
 - The look goal has an uninitialized observer and incorrect rider filtering.
